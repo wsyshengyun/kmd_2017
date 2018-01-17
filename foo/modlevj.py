@@ -4,7 +4,7 @@ from evvj import  EvVj, Xev, Xev_expand
 from pervj import PersonVj
 import  gcl
 import sun
-
+from sqlbase import *
 __author__ = 'Wsy'
 '''
 1, 如何添加帮助信息?
@@ -12,10 +12,10 @@ __author__ = 'Wsy'
 '''
 import _sql
 import datetime
-IS_WINDOWS = True 
+IS_WINDOWS = True
 import os
 if os.name != 'nt':
-    IS_WINDOWS = False 
+    IS_WINDOWS = False
 
 
 
@@ -39,6 +39,9 @@ def create_sqlAndTab_ifNotExist():
     testSql.create_many_table( _sql.sqlCreate_tabs_list )
 
 create_sqlAndTab_ifNotExist()
+
+'''new'''
+Base.metadata.create_all(engine)
 
 
 # ***************************************************************设置数据
@@ -130,7 +133,7 @@ class ManyPerVj(BaseMany):
         self.id_perObj = {}
 
     def getOwnPerNames():
-       # TODO 
+       # TODO
         return []
 
     def up_data(self):
@@ -828,6 +831,19 @@ class TMYData(object):
             _lit.sort(key=lambda x: gcl.strdate_to_date_M(x[0]), reverse=True )
 
         return _lit
+
+# 可能不用
+class Test(object):
+    def __init__(self, parent=None):
+        self.persOwn = []
+        self.perAll = []
+        self.perAdressAll = []
+        self.huoAll = []
+        self.huoTys = []
+        self.todayEvIds = []
+
+
+
 
 
 

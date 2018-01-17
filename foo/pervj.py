@@ -1,5 +1,5 @@
 # encoding: utf-8
-
+from sqlbase import *
 
 import datetime as dt
 import sys
@@ -10,7 +10,16 @@ import _sql
 reload(sys)
 sys.setdefaultencoding('utf8')
 class PersonVj(object):
+    __tablename__ = 'persion_1'
+    p_id = Column(Integer, primary_key = True )
+    name = Column(Text)
+    address = Column(Text)
+    phone = Column(Text)
+    bLine = Column(Integer)
+    crdate = Column(Text)
+    bz = Column(Text)
     def __init__(self, iid, iname, iadress, iphone, ibLine=1, icrdate=None, ibz=''):
+
         self._id = iid
         self._name = iname
         self._adress = iadress
@@ -104,8 +113,9 @@ def printPers(pers, lit=None):
         # print newPer
 
 if __name__ == '__main__':
-    testSql = _sql.TestSql()
 
+    pass
+    #testSql = _sql.TestSql()
     '''把人物数据插入到数据库中'''
     lit = [get_Per() for i  in range(10)]
     # for i in lit:
@@ -121,13 +131,13 @@ if __name__ == '__main__':
     #     printPers(pers, lit)
 
 
-    
-    
+
+
     ''' 有条件的读取人物数据'''
     # pers = testSql.find_some(_sql.SQL_PERSON.FIND_ADRESS)
     # printPers(pers, lit)
-    
-    
-    
 
-    
+
+
+
+
