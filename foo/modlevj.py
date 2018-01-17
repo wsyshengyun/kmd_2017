@@ -853,29 +853,8 @@ class Test(object):
 
 
 if __name__ == '__main__':
-    d = Test()
-    dd =  d.getDaysData()
-    print d.format_dit(dd, u'包装')
 
-    # test LookPers
-    # look = LookPers()
-    # print look.get_ids_from_adr('官庄镇')
-    # print look.get_ids_from_bLine(0)
+    pass
 
-    # for tu in  search_evs_only(1159):
-    #     print tu
-    # print search_sun_sum(1039)
-    # for tu in search_evs_from_date():
-    #     print tu
-    # new_date_setSql('d1', u'2016-01-01')
-    # new_date_setSql('d2', u'2018-01-01')
-    # print d1, d2
-    # many = ManyHuos()
-    # many.up_huos()
-    # many.test_print_huo()
 
-    #
-    # all = AllEvs()
-    # all.up_all_evs()
-    # all.get_per_xev_expand()
-    # all.perOwnSorted_keyIs_HuoId( 107 )
+
