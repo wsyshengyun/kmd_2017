@@ -9,9 +9,9 @@ import _sql
 
 reload(sys)
 sys.setdefaultencoding('utf8')
-class PersonVj(object):
-    __tablename__ = 'persion_1'
-    p_id = Column(Integer, primary_key = True )
+class PersonVj(Base):
+    __tablename__ = 'person_1'
+    id = Column(Integer, primary_key = True )
     name = Column(Text)
     address = Column(Text)
     phone = Column(Text)
@@ -20,61 +20,61 @@ class PersonVj(object):
     bz = Column(Text)
     def __init__(self, iid, iname, iadress, iphone, ibLine=1, icrdate=None, ibz=''):
 
-        self._id = iid
-        self._name = iname
-        self._adress = iadress
-        self._phone = iphone
-        self._bz = ibz
-        self._bLine = ibLine
+        self.id = iid
+        self.name = iname
+        self.adress = iadress
+        self.phone = iphone
+        self.bz = ibz
+        self.bLine = ibLine
         if None == icrdate:
-            self._crdate = dt.date.today()
+            self.crdate = dt.date.today()
         else:
-            self._crdate = icrdate
+            self.crdate = icrdate
 
-    @property
-    def id(self):return self._id
-    @id.setter
-    def id(self, val): self._id = val
-
-    @property
-    def name(self):return self._name
-    @name.setter
-    def name(self, val): self._name = val
-
-    @property
-    def adress(self):return self._adress
-    @adress.setter
-    def adress(self, val): self._adress = val
-
-    @property
-    def phone(self):return self._phone
-    @phone.setter
-    def phone(self, val): self._phone = val
-
-    @property
-    def bz(self):return self._bz
-    @bz.setter
-    def bz(self, val): self._bz = val
-
-    @property
-    def bLine(self):return self._bLine
-    @bLine.setter
-    def bLine(self, val): self._bLine = val
-
-    @property
-    def crdate(self):return self._crdate
-    @crdate.setter
-    def crdate(self, val): self._crdate = val
+#    @property
+#    def id(self):return self._id
+#    @id.setter
+#    def id(self, val): self._id = val
+#
+#    @property
+#    def name(self):return self._name
+#    @name.setter
+#    def name(self, val): self._name = val
+#
+#    @property
+#    def adress(self):return self._adress
+#    @adress.setter
+#    def adress(self, val): self._adress = val
+#
+#    @property
+#    def phone(self):return self._phone
+#    @phone.setter
+#    def phone(self, val): self._phone = val
+#
+#    @property
+#    def bz(self):return self._bz
+#    @bz.setter
+#    def bz(self, val): self._bz = val
+#
+#    @property
+#    def bLine(self):return self._bLine
+#    @bLine.setter
+#    def bLine(self, val): self._bLine = val
+#
+#    @property
+#    def crdate(self):return self._crdate
+#    @crdate.setter
+#    def crdate(self, val): self._crdate = val
 
 
     def __str__(self):
         temList = ['[',  str(self._id),
-                    self._name,
-                    self._phone,
-                    self._adress,
-                    str(self._bLine),
-                    self._crdate,
-                    self._bz,  ']'
+                    self.name,
+                    self.phone,
+                    self.adress,
+                    str(self.bLine),
+                    self.crdate,
+                    self.bz,  ']'
                     ]
         return ' '.join(temList)
 

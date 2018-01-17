@@ -7,11 +7,22 @@ __author__ = 'Administrator'
 
 import datetime
 import time
-
+from sqlbase import *
 
 
 # 个人事件情况
-class EvVj(object):
+class EvVj(Base):
+    __tablename__ = 'evs'
+    id = Column(Integer, primary_key=True)
+    nameId = Column(Integer)
+    huoId= Column(Integer)
+    sh= Column(Integer)
+    fa= Column(Integer)
+    sun= Column(Integer)
+    numla= Column(Integer)
+    money= Column(Float)
+    crdate= Column(Text)
+    bz = Column(Text)
     def __init__(self, id, nameId, huoId, sh, fa, sun, numla, money, crdate=None, bz=''):
         self.bz = bz
         self.crdate = crdate
@@ -33,26 +44,6 @@ class EvVj(object):
                str(self.fa), str(self.sun), str(self.numla), str(self.money), self.crdate, self.bz
 
 
-    # def set_ev_from_date(self, ev):
-    #     dlast = gcl.strdate_to_date_M( self.crdate )
-    #     dev = gcl.strDateToQdate( ev.crdate )
-    #     if dev > dlast:
-    #         self.__dict__.update(ev.__dict__)
-
-    # def __eq__(self, other):
-    #     if self.id == other.id and \
-    #         self.nameId == other.nameId and\
-    #         self.huoId == other.huoId and \
-    #         self.sh == other.sh and \
-    #         self.fa == other.fa and \
-    #         self.sun == other.sun and \
-    #         self.numla == other.numla and \
-    #         self.crdate == other.crdate and \
-    #         self.money == other.money and \
-    #         self.bz == other.bz :
-    #         return True
-    #     else:
-    #         return False
 
 import datetime
 import gcl
