@@ -1,5 +1,6 @@
-# coding=utf8
+#coding=utf8
 
+from sqlbase import *
 import datetime
 __author__ = 'Administrator'
 '''
@@ -8,7 +9,16 @@ __author__ = 'Administrator'
 
 tys = ['包装', '竹圈', '粘纸' ,'包装(无蜡)' ]
 
-class HuoVj(object):
+class HuoVj(Base):
+    __tablename__ = 'huo'
+    id = Column(Integer, primary_key=True)
+    ty = Column(Text)
+    pay= Column(Float)
+    nums = Column(Integer)
+    bvalid= Column(Integer)
+    bLa= Column(Integer)
+    crdate= Column(Text)
+    bz= Column(Text)
     def __init__(self, id, ty, pay, nums, bvalid=1, bLa = 0, crdate=None, bz=""):
         self.id = id
         self.ty = ty

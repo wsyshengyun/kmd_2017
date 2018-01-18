@@ -14,8 +14,8 @@ from sqlbase import *
 class EvVj(Base):
     __tablename__ = 'evs'
     id = Column(Integer, primary_key=True)
-    nameId = Column(Integer)
-    huoId= Column(Integer)
+    nameId = Column(Integer, ForeignKey('person_1.id'))
+    huoId= Column(Integer, ForeignKey('huo.id'))
     sh= Column(Integer)
     fa= Column(Integer)
     sun= Column(Integer)
@@ -23,6 +23,9 @@ class EvVj(Base):
     money= Column(Float)
     crdate= Column(Text)
     bz = Column(Text)
+    huos = relationship('HuoVj', backref='_evs')
+    pers = relationship('PersonVj', backref='_evs')
+
     def __init__(self, id, nameId, huoId, sh, fa, sun, numla, money, crdate=None, bz=''):
         self.bz = bz
         self.crdate = crdate

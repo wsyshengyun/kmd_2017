@@ -13,7 +13,7 @@ class PersonVj(Base):
     __tablename__ = 'person_1'
     id = Column(Integer, primary_key = True )
     name = Column(Text)
-    address = Column(Text)
+    adress = Column(Text)
     phone = Column(Text)
     bLine = Column(Integer)
     crdate = Column(Text)
