@@ -1,9 +1,10 @@
 # coding=utf8
 from basevj import BaseMany
-from evvj import  EvVj, Xev, Xev_expand
 from pervj import PersonVj
-import  gcl
+from huovj import HuoVj
 import sun
+from evvj import  EvVj, Xev, Xev_expand
+import  gcl
 from sqlbase import *
 __author__ = 'Wsy'
 '''
@@ -17,7 +18,11 @@ import os
 if os.name != 'nt':
     IS_WINDOWS = False
 
-
+# set sql
+class Set1(Base):
+    __tablename__ = 'set'
+    name = Column(Text, primary_key=True)
+    val = Column(Text)
 
 
 
@@ -853,7 +858,9 @@ class Test(object):
 
 
 if __name__ == '__main__':
-
+    Session = sessionmaker(engine)
+    session = Session()
+    #print session.query(PersonVj).count()
     pass
 
 
