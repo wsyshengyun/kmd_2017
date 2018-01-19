@@ -83,15 +83,16 @@ class Ui_per(QDialog, per.Ui_Dialog):
         if phone and not gcl.is_phone(phone): return
         if '' == adress: return
 
+        # new
+        newper = PersonVj(id=None, name=name, adress=adress, phone=phone, crdate=crdate,
+                bz=bz, bLine=onLine)
         # save
         if self.per:  # 修改人物， 下面保存修改
-            modlevj.mod_person(name,adress, phone,onLine, crdate, bz, self.per._id)
-            self.per.name = name
-            self.per.adress = adress
-            self.per.phone = phone
-            self.per.crdate = crdate
-            self.per.bz = bz
-            self.per.bLine = onLine
+            # modlevj.mod_person(name,adress, phone,onLine, crdate, bz, self.per._id)
+            newper.id = self.per.id
+            self.per.mod(newper)
         else:  # 新建的人物
-            modlevj.new_person(name, adress, phone, onLine, crdate, bz)
+            # modlevj.new_person(name, adress, phone, onLine, crdate, bz)
+            newper.add()
         self.accept()
+

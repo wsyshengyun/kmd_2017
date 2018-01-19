@@ -6,25 +6,38 @@ import sun
 from evvj import  EvVj, Xev, Xev_expand
 import  gcl
 from sqlbase import *
+import _sql
+import datetime
+import os
+
 __author__ = 'Wsy'
 '''
 1, 如何添加帮助信息?
 
 '''
-import _sql
-import datetime
 IS_WINDOWS = True
-import os
 if os.name != 'nt':
     IS_WINDOWS = False
 
 # set sql
 class Set1(Base):
     __tablename__ = 'set'
+    @classmethod
+    def set_d1d2(cls, d1, d2):
+        dit = {'name':d1, 'val':d1}
+        session.add(self)
+        session.commit()
     name = Column(Text, primary_key=True)
     val = Column(Text)
 
+def set_d1d2(d1, d2):
+    objset1 = Set1('d1', d1)
+    objset2 = Set1('d2', d2)
+    add_data((objset1, objset2))
 
+
+'''new'''
+Base.metadata.create_all(engine)
 
 version = 'v1.2'
 test_dbpath = "E:\\_Wsy\\kmdkmd.db"
@@ -32,9 +45,8 @@ default_db_path = "E:\\kmdkmd.db"
 if not IS_WINDOWS:
     test_dbpath = "/home/pi/.data/test_kmdkmd.db"
     default_db_path = "/home/pi/.data/kmdkmd.db"
-
 curpath = default_db_path
-testSql = _sql.TestSql(path = curpath)
+# testSql =  _sql.TestSql(path = curpath)
 
 curper = None
 curdate = str(datetime.date.today())
@@ -43,10 +55,7 @@ curdate = str(datetime.date.today())
 def create_sqlAndTab_ifNotExist():
     testSql.create_many_table( _sql.sqlCreate_tabs_list )
 
-create_sqlAndTab_ifNotExist()
-
-'''new'''
-Base.metadata.create_all(engine)
+# create_sqlAndTab_ifNotExist()
 
 
 # ***************************************************************设置数据
@@ -71,47 +80,68 @@ def find_d1d2_setSql():
         new_date_setSql(u'd2', tu_[1])
         return tu_
 
+def setDefD1D2():
+    tu_ = (u'2015-01-01', u'2100-12-12')
+    newd1 = Set1(name='d1', val=tu_[0])
+    newd2 = Set1(name='d2', val=tu_[1])
+    session.add(newd1)
+    session.add(newd2)
+    session.commit()
+    return tu_
+
+def find_d1d2_setSql1():
+    try:
+        find_d1 = session.query(Set1.val).filter(Set1.name=='d1').first()
+        find_d2 = session.query(Set1.val).filter(Set1.name=='d2').first()
+        if find_d1 is None or find_d2 is None:
+            find_d1, find_d2 = setDefD1D2()
+        else:
+            find_d1 = find_d1[0]
+            find_d2 = find_d2[0]
+        return find_d1, find_d2
+    except IndexError:
+        return setDefD1D2()
+
+
+
 
 
 d1 = None
 d2 = None
 
-def set_d1_d2(ud1, ud2):
-    global d1, d2
-    if ud1: d1 = ud1
-    if ud2: d2 = ud2
+d1,d2 = find_d1d2_setSql1()
+# def set_d1_d2(ud1, ud2):
+    # global d1, d2
+    # if ud1: d1 = ud1
+    # if ud2: d2 = ud2
 
-set_d1_d2( * find_d1d2_setSql() )
-_sql.SQL_EV.set_d1_d2(d1, d2)
+# set_d1_d2( * find_d1d2_setSql() )
+# _sql.SQL_EV.set_d1_d2(d1, d2)
 
 # ***************************************************************per
 
-def new_person(name, address, phone, bLine, crdate, bz=''):
-    ''' 需要先检查类型是否正确'''
-    datas = [(name, address, phone, bLine, crdate, bz)]
-    testSql.insert(_sql.SQL_PERSON.INSERT_AUTO, datas)
+# def new_person(name, address, phone, bLine, crdate, bz=''):
+    # ''' 需要先检查类型是否正确'''
+    # datas = [(name, address, phone, bLine, crdate, bz)]
+    # testSql.insert(_sql.SQL_PERSON.INSERT_AUTO, datas)
 
-def mod_person_obj(perObj):
-    datas = [(perObj._name, perObj._adress, perObj._phone, perObj._bLine, perObj._crdate, perObj._bz, perObj._id)]
-    testSql.update(_sql.SQL_PERSON.UPDATE, datas)
+# def mod_person_obj(perObj):
+    # datas = [(perObj._name, perObj._adress, perObj._phone, perObj._bLine, perObj._crdate, perObj._bz, perObj._id)]
+    # testSql.update(_sql.SQL_PERSON.UPDATE, datas)
 
-def mod_person(name, adress, phone, bLine, crdate, bz, id):
-    datas = [(name, adress, phone, bLine, crdate, bz, id)]
-    testSql.update(_sql.SQL_PERSON.UPDATE, datas)
+# def mod_person(name, adress, phone, bLine, crdate, bz, id):
+    # datas = [(name, adress, phone, bLine, crdate, bz, id)]
+    # testSql.update(_sql.SQL_PERSON.UPDATE, datas)
 
 # ***************************************************************
 
 
 # ***************************************************************qita
 def get_adresss():
-    datas = testSql.find_some(_sql.SQL_PERSON.FIND_Lie)
+    # datas = testSql.find_some(_sql.SQL_PERSON.FIND_Lie)
+    adrs= session.query(PersonVj.adress).all()
     # print datas
-    _datas = [list(tu) for tu in datas]  # 元组元素转化为列表元素
-    lit = []
-    for el in _datas:
-
-        lit += el
-    adr_set = set(lit)
+    adr_set = set(adrs)
     net_adrs = list(adr_set)
     # 对地址进行按字母排序
     net_adrs.sort(key= lambda x: gcl.getPinyin_first(x))
@@ -119,9 +149,9 @@ def get_adresss():
     return net_adrs
 
 
-def get_person_all():
-    datas = testSql.find_all(_sql.SQL_PERSON.FIND)
-    return datas
+# def get_person_all():
+    # datas = testSql.find_all(_sql.SQL_PERSON.FIND)
+    # return datas
 
 
 class ManyPerVj(BaseMany):
@@ -143,11 +173,13 @@ class ManyPerVj(BaseMany):
 
     def up_data(self):
         self.lit=[]
-        datas = get_person_all( )
-        for tu in datas:
-            # per = PersonVj(tu[0], tu[1], tu[2], tu[3], tu[4], tu[5], tu[6])
-            per = PersonVj( *tu )
-            self.add( per )
+        # datas = get_person_all( )
+        datas = session.query(PersonVj).all()
+        for per in datas:
+            self.add(per)
+        # for tu in datas:
+            # per = PersonVj( *tu )
+            # self.add( per )
 
 
     def __str__(self):
@@ -187,96 +219,83 @@ print '<modlevj>'
 
 # ***************************************************************货物
 
-def new_huoAuto(ty, pay, nums, ibvalid, ibLa, crdate, bz):
-    datas = [(ty, pay, nums, ibvalid, ibLa, crdate, bz)]
-    testSql.insert(_sql.SQL_HUO.INSERT_AUTO, datas)
+# def new_huoAuto(ty, pay, nums, ibvalid, ibLa, crdate, bz):
+    # datas = [(ty, pay, nums, ibvalid, ibLa, crdate, bz)]
+    # testSql.insert(_sql.SQL_HUO.INSERT_AUTO, datas)
 
-def new_huo(id, ty, pay, nums, ibvalid, ibLa, crdate, bz):
-    datas = [(id, ty, pay, nums, ibvalid, ibLa, crdate, bz)]
-    testSql.insert(_sql.SQL_HUO.INSERT, datas)
+# def new_huo(id, ty, pay, nums, ibvalid, ibLa, crdate, bz):
+    # datas = [(id, ty, pay, nums, ibvalid, ibLa, crdate, bz)]
+    # testSql.insert(_sql.SQL_HUO.INSERT, datas)
 
-def mod_huo(ty, pay, nums, ibvalid, ibLa, crdate, bz, id):
-    datas = [(ty, pay, nums, ibvalid, ibLa, crdate, bz, id)]
-    testSql.update(_sql.SQL_HUO.UPDATE, datas)
+# def mod_huo(ty, pay, nums, ibvalid, ibLa, crdate, bz, id):
+    # datas = [(ty, pay, nums, ibvalid, ibLa, crdate, bz, id)]
+    # testSql.update(_sql.SQL_HUO.UPDATE, datas)
 
 def find_all_huos():
-    return testSql.find_some(_sql.SQL_HUO.FIND)
+    return session.query(HuoVj).all()
 
 def get_huoTys():
-    datas = testSql.find_some(_sql.SQL_HUO.FIND_TYS)
-    _datas = [list(tu) for tu in datas]
-    lit = []
-    for el in _datas:
-        lit += el
-    tys_set = set(lit)
+    _datas = session.query(HuoVj.ty).all()
+    tylist = combain_list(_datas)
+    tys_set = set(tylist)
     return list(tys_set)
 
 def get_huo_valid_ids():
-    datas = testSql.find_some(_sql.SQL_HUO.FIND_VALID_IDS)
-    _datas = [list(tu) for tu in datas]
-    lit = []
-    for el in _datas:
-        lit += el
-    lit.sort(key= lambda strid: int(strid), reverse=True)
-    return lit
+    _datas = session.query(HuoVj.id).filter(HuoVj.bvalid==1).all()
+    huoid_lit = combain_list(_datas)
+    huoid_lit.sort( reverse=True)
+    return huoid_lit
 
 
 # ***************************************************************事件
-def new_evAuto(nameId, huoId, sh, fa, sun, numla, money, crdate, bz):
-    datas = [(nameId, huoId, sh, fa, sun, numla, money, crdate, bz)]
-    testSql.insert(_sql.SQL_EV.INSERT_AUTO, datas)
-
-
-def new_ev(id, nameId, huoId, sh, fa, sun, numla, money, crdate, bz):
-    datas = [(id, nameId, huoId, sh, fa, sun, numla, money, crdate, bz)]
-    testSql.insert(_sql.SQL_EV.INSERT, datas)
-
-
-def mod_ev(nameId, huoId, sh, fa, sun, numla, money, crdate, bz, id):
-    datas = [(nameId, huoId, sh, fa, sun, numla, money, crdate, bz, id)]
-    testSql.update(_sql.SQL_EV.UPDATE, datas)
 
 def find_all_evs():
-    return testSql.find_some(_sql.SQL_EV.FIND_FROM_D1_D2())
-
+    # return testSql.find_some(_sql.SQL_EV.FIND_FROM_D1_D2())
+    return session.query(EvVj).all()
 
 
 # ***************************************************************损耗
 
 
-def new_sunAuto(nameId, evId, c_zhi, c_quan, c_dai, c_la, c_kmd, c_zhu, c_ts, crdate):
-    datas = [(nameId, evId,  c_zhi, c_quan, c_dai, c_la, c_kmd, c_zhu, c_ts, crdate)]
-    testSql.insert(_sql.SQL_SUN.INSERT_AUTO, datas)
+# def new_sunAuto(nameId, evId, c_zhi, c_quan, c_dai, c_la, c_kmd, c_zhu, c_ts, crdate):
+    # datas = [(nameId, evId,  c_zhi, c_quan, c_dai, c_la, c_kmd, c_zhu, c_ts, crdate)]
+    # testSql.insert(_sql.SQL_SUN.INSERT_AUTO, datas)
 
 
-def mod_sun(id, nameId, evId, c_zhi, c_quan, c_dai, c_la, c_kmd, c_zhu, c_ts, crdate):
-    datas = [(nameId, evId, c_zhi, c_quan, c_dai, c_la, c_kmd, c_zhu, c_ts, crdate, id)]
-    testSql.update(_sql.SQL_SUN.UPDATE, datas)
+# def mod_sun(id, nameId, evId, c_zhi, c_quan, c_dai, c_la, c_kmd, c_zhu, c_ts, crdate):
+    # datas = [(nameId, evId, c_zhi, c_quan, c_dai, c_la, c_kmd, c_zhu, c_ts, crdate, id)]
+    # testSql.update(_sql.SQL_SUN.UPDATE, datas)
 
 
 # ***************************************************************主界面
 # 建立在线人物拼音字典  {wsy.汪生云:person}
 
 def search_evs(nameid, huoid):
-    sql_ev = _sql.SQL_EV
-    sql_ev.id_name, sql_ev.id_huo= nameid, huoid
-    datas = testSql.find_some(sql_ev.SQL_FIND_NHD())
+    # sql_ev = _sql.SQL_EV
+    # sql_ev.id_name, sql_ev.id_huo= nameid, huoid
+    # datas = testSql.find_some(sql_ev.SQL_FIND_NHD())
+    #
+    datas = session.query(EvVj).filter(EvVj.nameId==nameid).filter(EvVj.huoId==huoid).all()
+
     return datas
 
 def search_evs_from_huoId(hid):
-    return testSql.find_some(_sql.SQL_EV.FIND_EVS_FROM_HUOID(hid))
+    return session.query(EvVj).filter(EvVj.huoId==hid).all()
+    # return testSql.find_some(_sql.SQL_EV.FIND_EVS_FROM_HUOID(hid))
 
 
 
 def search_evs_only(pid):
-    SQL = _sql.SQL_EV
-    SQL.d1, SQL.d2 = d1, d2
-    return testSql.find_some( SQL.SQL_FIND_ONLY( pid ) )
+    # SQL = _sql.SQL_EV
+    # SQL.d1, SQL.d2 = d1, d2
+    # return testSql.find_some( SQL.SQL_FIND_ONLY( pid ) )
+    return session.query(EvVj).filter(EvVj.nameId==pid).all()
 
 def search_evs_from_date():
-    SQL = _sql.SQL_EV
-    # todo curdate 是否需要限制
-    return testSql.find_some(SQL.SQL_FIND_FROM_DATE(curdate))
+    # SQL = _sql.SQL_EV
+    # return testSql.find_some(SQL.SQL_FIND_FROM_DATE(curdate))
+    return session.query(EvVj).filter(EvVj.crdate<d2).filter(EvVj.crdate>d1).all()
+
 
 
 
@@ -312,18 +331,16 @@ class ManyHuos(object):
         self.ids = []
 
     def up_huos(self):
-        datas = find_all_huos()
-        for tu in datas:
-            temp_huo = huovj.HuoVj(*tu)
-            ty_temp = temp_huo.ty
-            id_temp = temp_huo.id
-            self.id_obj_dict[temp_huo.id] = temp_huo
-            self.ty_ids_dict[ty_temp] = temp_huo.id
-            if ty_temp not in self.tys:
-                self.tys.append(ty_temp)
+        for huo in find_all_huos():
+            huo_ty = huo.ty
+            id_temp = huo.id
+            self.id_obj_dict[huo.id] = huo
+            self.ty_ids_dict[huo_ty] = huo.id
+            if huo_ty not in self.tys:
+                self.tys.append(huo_ty)
             if id_temp not in self.ids:
                 self.ids.append(id_temp)
-            self.all_huos.append(temp_huo)
+            self.all_huos.append(huo)
 
     def get_valid_huos_id(self):
         id_list = []
@@ -333,8 +350,6 @@ class ManyHuos(object):
                     id_list.append(huo.id)
         return id_list
 
-    # def is_huo_valid(self, huoId):
-    #     return  huoId in self.get_valid_huos_id()
 
 
 
@@ -398,11 +413,8 @@ class PerWork(object):
         default_id = id
         if None == default_id:
             default_id = curper.id
-        evdatas = search_evs_only(default_id)
-        if evdatas:
-            for tu in evdatas:
-                ev = EvVj(*tu)
-                self.add_ev( ev )
+        for ev in search_evs_only(default_id):
+            sefl.add_ev(ev)
 
 
     def add_ev(self, ev):
@@ -478,8 +490,7 @@ class DateWork(object):
     def up_date_data(self):
         self.clear()
         evdatas = search_evs_from_date()
-        for tu in evdatas:
-            ev = EvVj(*tu)
+        for ev in evdatas:
             self.allEvs.append(ev)
 
             h_k = ev.huoId

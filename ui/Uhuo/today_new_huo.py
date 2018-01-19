@@ -4,6 +4,7 @@ from foo import gcl
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from foo import modlevj
+from foo.huovj import HuoVj
 import middle_control
 QTextCodec.setCodecForTr(QTextCodec.codecForName('utf8'))
 
@@ -72,10 +73,16 @@ class Ui_Huo(QDialog, ui_huo.Ui_Dialog):
         if not pay: return
         else: pay = float(pay)
 
+        newhuo = HuoVj(id=None, ty=ty, pay=pay, nums=nums, bvalid=ibvalid,
+                bLa=ibLa, crdate = crdate, bz=bz)
         if not self.huoObj:
-            modlevj.new_huoAuto(ty, pay, nums, ibvalid, ibLa, crdate, bz)
+            # modlevj.new_huoAuto(ty, pay, nums, ibvalid, ibLa, crdate, bz)
+            newhuo.add()
         else:
-            modlevj.mod_huo(ty, pay, nums, ibvalid, ibLa, crdate, bz, self.huoObj.id)
+            newhuo.id = self.huoObj.id
+            self.huoObj.mod(newhuo)
+            # modlevj.mod_huo(ty, pay, nums, ibvalid, ibLa, crdate, bz, self.huoObj.id)
+
 
         # check ty
         # write into sql

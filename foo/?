@@ -7,7 +7,6 @@ engine = create_engine("sqlite:///kmdkmd.db", echo=False)
 #engine = create_engine("sqlite:///:memory:", echo=True)
 Base = declarative_base(engine)
 Session = sessionmaker(engine)
-session = Session()
 print '-'*60
 
 def add_data(data):
@@ -24,27 +23,11 @@ def add_data(data):
     session.close()
 
 def mod_data(new):
-    session = get_session()
-    session.merge(new)
-    session.commit()
-    session.close()
     pass
 
-def del_data(obj):
-    session =get_session()
-    session.delete(obj)
-    session.commit()
-    session.close()
 
 def get_session():
     return Session()
-
-
-def combain_list(datalist):
-    lit = []
-    for tu in datalist:
-        lit += list(tu)
-    return lit
 
 
 

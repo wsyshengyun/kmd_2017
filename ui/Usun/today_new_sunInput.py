@@ -6,8 +6,9 @@ from foo import modlevj
 from foo import gcl
 import middle_control
 import mycolor
-QTextCodec.setCodecForTr(QTextCodec.codecForName('utf8'))
 import ui_sunInput
+from foo.sun import Sun
+QTextCodec.setCodecForTr(QTextCodec.codecForName('utf8'))
 class Ui_SunInput(QDialog, ui_sunInput.Ui_Dialog):
     def __init__(self, sunObj=None, evId=None,  parent=None):
         super(Ui_SunInput, self).__init__(parent)
@@ -108,13 +109,16 @@ class Ui_SunInput(QDialog, ui_sunInput.Ui_Dialog):
 
         if None in val_lit:
             return
-
+        newsun = Sun(*val_lit)
         # 保存
         if self.sunObj:  # 修改
-            val_lit.insert(0, self.sunObj.id)
-            modlevj.mod_sun(*val_lit)
+            # val_lit.insert(0, self.sunObj.id)
+            # modlevj.mod_sun(*val_lit)
+            newsun.id = self.sunObj.id
+            self.sunObj.mod(newsun)
         else:  # 新建obj
-            modlevj.new_sunAuto(*val_lit)
+            # modlevj.new_sunAuto(*val_lit)
+            newsun.add()
 
         self.accept()
         # self.close()

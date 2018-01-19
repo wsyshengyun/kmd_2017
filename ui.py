@@ -54,7 +54,6 @@ class B_Menu(object):
         '''
 
         '''
-
         for mstr in self.menuDict:
             self.add_menu(mstr, self.menuDict[mstr], obj)
         self.iexec()
@@ -67,14 +66,8 @@ class B_Menu(object):
     def iexec(self):
         self.menu.exec_(QCursor.pos())
 
-class UiPoint(object):
-    init_pos = QPoint(0,0)
-    def __init__(self, main_obj=None):
-        self.main_obj = main_obj
 
 
-
-pointObj = UiPoint()
 
 class MainUi(QDialog, uiMain.Ui_Dialog):
     def __init__(self, parent=None):
@@ -96,7 +89,7 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
         self.bwidget.add_widget(self.findName)
         self.bwidget.install_filter(self)
         self.init()
-        self.move(pointObj.init_pos)
+        self.move(0,0)
         self.setWindowTitle(modlevj.curpath + ' ' +  modlevj.version)
 
         self.myConnect()

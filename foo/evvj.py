@@ -27,20 +27,27 @@ class EvVj(Base):
     pers = relationship('PersonVj', backref='_evs')
 
     def __init__(self, id, nameId, huoId, sh, fa, sun, numla, money, crdate=None, bz=''):
-        self.bz = bz
-        self.crdate = crdate
-        self.money = money
-        self.numla = numla
-        self.sun = sun
-        self.fa = fa
-        self.sh = sh
         self.id = id
         self.nameId = nameId
         self.huoId = huoId
+        self.sh = sh
+        self.fa = fa
+        self.sun = sun
+        self.numla = numla
+        self.money = money
+        self.crdate = crdate
+        self.bz = bz
 
         if None == crdate:
             # self.crdate = datetime.date.today()
             self.crdate = str(datetime.date.today()) + ' ' + time.strftime("%H:%M:%S") # mok
+    def add(self):
+            add_data(self)
+    def mod(self, new):
+        mod_data(new)
+    def delself(self):
+        del_data(self)
+
 
     def get_tu(self):
         return str(self.id), str(self.nameId), str(self.huoId), str(self.sh),\
