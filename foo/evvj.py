@@ -41,6 +41,9 @@ class EvVj(Base):
         if None == crdate:
             # self.crdate = datetime.date.today()
             self.crdate = str(datetime.date.today()) + ' ' + time.strftime("%H:%M:%S") # mok
+
+    def toList(self):
+        return self.id, self.nameId, self.huoId, self.sh, self.fa, self.sun, self.numla, self.money, self.crdate, self.bz
     def add(self):
             add_data(self)
     def mod(self, new):

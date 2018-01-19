@@ -32,7 +32,8 @@ class PersonVj(Base):
             self.crdate = dt.date.today()
         else:
             self.crdate = crdate
-
+    def toList(self):
+        return self.id, self.name, self.adress, self.phone, self.bLine, self.crdate, self.bz
     def add(self):
         add_data(self)
     def mod(self, new):

@@ -2,7 +2,7 @@
 from basevj import BaseMany
 from pervj import PersonVj
 from huovj import HuoVj
-import sun
+from sun import Sun
 from evvj import  EvVj, Xev, Xev_expand
 import  gcl
 from sqlbase import *
@@ -52,33 +52,12 @@ curper = None
 curdate = str(datetime.date.today())
 
 
-def create_sqlAndTab_ifNotExist():
-    testSql.create_many_table( _sql.sqlCreate_tabs_list )
+# def create_sqlAndTab_ifNotExist():
+    # testSql.create_many_table( _sql.sqlCreate_tabs_list )
 
 # create_sqlAndTab_ifNotExist()
 
 
-# ***************************************************************设置数据
-def new_date_setSql(name, val):
-    SQL = _sql.SQL_SET
-    datas = [(name, val)]
-    testSql.insert(SQL.INSERT, datas=datas)
-
-def update_date_setSql(name, val):
-    datas = [(val, name)]
-    testSql.update(_sql.SQL_SET.UPDATE, datas)
-
-def find_d1d2_setSql():
-    datas = testSql.find_some(_sql.SQL_SET.FIND_DATE_VAL(u'd1'))
-    datas2 = testSql.find_some(_sql.SQL_SET.FIND_DATE_VAL(u'd2'))
-    if datas and datas2:
-        return datas[0][0], datas2[0][0]
-    else:
-        print 'date not find, will use default'
-        tu_ = (u'2015-01-01', u'2100-12-12')
-        new_date_setSql(u'd1', tu_[0])
-        new_date_setSql(u'd2', tu_[1])
-        return tu_
 
 def setDefD1D2():
     tu_ = (u'2015-01-01', u'2100-12-12')
@@ -110,48 +89,17 @@ d1 = None
 d2 = None
 
 d1,d2 = find_d1d2_setSql1()
-# def set_d1_d2(ud1, ud2):
-    # global d1, d2
-    # if ud1: d1 = ud1
-    # if ud2: d2 = ud2
-
-# set_d1_d2( * find_d1d2_setSql() )
-# _sql.SQL_EV.set_d1_d2(d1, d2)
-
-# ***************************************************************per
-
-# def new_person(name, address, phone, bLine, crdate, bz=''):
-    # ''' 需要先检查类型是否正确'''
-    # datas = [(name, address, phone, bLine, crdate, bz)]
-    # testSql.insert(_sql.SQL_PERSON.INSERT_AUTO, datas)
-
-# def mod_person_obj(perObj):
-    # datas = [(perObj._name, perObj._adress, perObj._phone, perObj._bLine, perObj._crdate, perObj._bz, perObj._id)]
-    # testSql.update(_sql.SQL_PERSON.UPDATE, datas)
-
-# def mod_person(name, adress, phone, bLine, crdate, bz, id):
-    # datas = [(name, adress, phone, bLine, crdate, bz, id)]
-    # testSql.update(_sql.SQL_PERSON.UPDATE, datas)
-
-# ***************************************************************
-
 
 # ***************************************************************qita
 def get_adresss():
-    # datas = testSql.find_some(_sql.SQL_PERSON.FIND_Lie)
     adrs= session.query(PersonVj.adress).all()
-    # print datas
     adr_set = set(adrs)
     net_adrs = list(adr_set)
     # 对地址进行按字母排序
     net_adrs.sort(key= lambda x: gcl.getPinyin_first(x))
-    # print net_adrs
     return net_adrs
 
 
-# def get_person_all():
-    # datas = testSql.find_all(_sql.SQL_PERSON.FIND)
-    # return datas
 
 
 class ManyPerVj(BaseMany):
@@ -173,13 +121,9 @@ class ManyPerVj(BaseMany):
 
     def up_data(self):
         self.lit=[]
-        # datas = get_person_all( )
         datas = session.query(PersonVj).all()
         for per in datas:
             self.add(per)
-        # for tu in datas:
-            # per = PersonVj( *tu )
-            # self.add( per )
 
 
     def __str__(self):
@@ -219,18 +163,6 @@ print '<modlevj>'
 
 # ***************************************************************货物
 
-# def new_huoAuto(ty, pay, nums, ibvalid, ibLa, crdate, bz):
-    # datas = [(ty, pay, nums, ibvalid, ibLa, crdate, bz)]
-    # testSql.insert(_sql.SQL_HUO.INSERT_AUTO, datas)
-
-# def new_huo(id, ty, pay, nums, ibvalid, ibLa, crdate, bz):
-    # datas = [(id, ty, pay, nums, ibvalid, ibLa, crdate, bz)]
-    # testSql.insert(_sql.SQL_HUO.INSERT, datas)
-
-# def mod_huo(ty, pay, nums, ibvalid, ibLa, crdate, bz, id):
-    # datas = [(ty, pay, nums, ibvalid, ibLa, crdate, bz, id)]
-    # testSql.update(_sql.SQL_HUO.UPDATE, datas)
-
 def find_all_huos():
     return session.query(HuoVj).all()
 
@@ -250,7 +182,6 @@ def get_huo_valid_ids():
 # ***************************************************************事件
 
 def find_all_evs():
-    # return testSql.find_some(_sql.SQL_EV.FIND_FROM_D1_D2())
     return session.query(EvVj).all()
 
 
@@ -271,29 +202,18 @@ def find_all_evs():
 # 建立在线人物拼音字典  {wsy.汪生云:person}
 
 def search_evs(nameid, huoid):
-    # sql_ev = _sql.SQL_EV
-    # sql_ev.id_name, sql_ev.id_huo= nameid, huoid
-    # datas = testSql.find_some(sql_ev.SQL_FIND_NHD())
-    #
     datas = session.query(EvVj).filter(EvVj.nameId==nameid).filter(EvVj.huoId==huoid).all()
-
     return datas
 
 def search_evs_from_huoId(hid):
     return session.query(EvVj).filter(EvVj.huoId==hid).all()
-    # return testSql.find_some(_sql.SQL_EV.FIND_EVS_FROM_HUOID(hid))
 
 
 
 def search_evs_only(pid):
-    # SQL = _sql.SQL_EV
-    # SQL.d1, SQL.d2 = d1, d2
-    # return testSql.find_some( SQL.SQL_FIND_ONLY( pid ) )
     return session.query(EvVj).filter(EvVj.nameId==pid).all()
 
 def search_evs_from_date():
-    # SQL = _sql.SQL_EV
-    # return testSql.find_some(SQL.SQL_FIND_FROM_DATE(curdate))
     return session.query(EvVj).filter(EvVj.crdate<d2).filter(EvVj.crdate>d1).all()
 
 
@@ -302,9 +222,7 @@ def search_evs_from_date():
 def search_sun(nameId=None, d1=d1, d2=d2):
     if None == nameId and curper is not None:
         nameId = curper.id
-    SQL = _sql.SQL_SUN
-    return testSql.find_some(SQL.FIND_FROM_NAMEID(nameId, d1, d2))
-
+    return session.query(Sun).filter(and_((Sun.nameId==nameId,Sun.crdate>d1, Sun.crdate<d2))).all()
 
 def search_sun_sum(nameId=None):
     if None == nameId and curper is not None: nameId = curper.id
@@ -385,7 +303,6 @@ class PerWork(object):
 
     def init_data(self):
         self.hid_Xevs = {}
-        # self.hid_ownNum = []
         self.hid_ownEvs = {}
         self.hid_evs = {}
         self.allEvs = []
@@ -411,10 +328,10 @@ class PerWork(object):
 
     def up_allEVs_from_sql(self, id=None):
         default_id = id
-        if None == default_id:
+        if None ==default_id:
             default_id = curper.id
         for ev in search_evs_only(default_id):
-            sefl.add_ev(ev)
+            self.add_ev(ev)
 
 
     def add_ev(self, ev):
@@ -447,11 +364,6 @@ class PerWork(object):
                     self.hid_ownEvs = {}
 
 
-    # def test_108(self):
-    #     print 'new test ----- ------'
-    #     if 108 in self.hid_evs:
-    #         for ev in self.hid_evs[108]:
-    #             print ev.id, ev.sh, ev.fa
 
 
     def get_ownNums(self):
@@ -592,8 +504,8 @@ class AllEvs(object):
 
 
     def up_all_evs(self):
-        for tu in find_all_evs():
-            self.allevs.append(EvVj(*tu))
+        for ev in find_all_evs():
+            self.allevs.append(ev)
 
     def get_xevExpand(self):
         if self.allevs:
@@ -697,35 +609,25 @@ class LookPers(object):
 
     def get_ids_from_adr(self, adr=None):
         if adr != '':
-            find_sql = _sql.SQL_PERSON.FIND_IDS_FROM_ADR(adr)
+            ids = session.query(PersonVj.id).filter(PersonVj.adress==adr).all()
         else:
-            find_sql = _sql.SQL_PERSON.FIND_ALL_IDS
-        ids = testSql.find_some( find_sql )
-        # print len(ids)
-        id_list = [None]*len(ids)
-        for i, tu in enumerate(ids):
-            id_list[i] = tu[0]
-        return id_list
+            ids = session.query(PersonVj.id).all()
+        ids = combain_list(ids)
+        return ids
 
 
     def get_ids_from_bLine(self, bline=None):
-        if bline != None:
-            find_sql = _sql.SQL_PERSON.FIND_IDS_FROM_LINE(bline)
+        if bline > 0:
+            ids = session.query(PersonVj.id).filter(PersonVj.bLine==1).all()
         else:
-            find_sql = _sql.SQL_PERSON.FIND_ALL_IDS
-        ids = testSql.find_some(find_sql)
-        id_list = [None]*len(ids)
-        for i, tu in enumerate(ids):
-            id_list[i] = tu[0]
-        return id_list
+            ids = session.query(PersonVj.id).all()
+        ids = combain_list(ids)
+        return ids
 
     def get_all_ids(self):
-        findSql = _sql.SQL_PERSON.FIND_ALL_IDS
-        ids = testSql.find_some(findSql)
-        id_list = [None] * len( ids )
-        for i, tu in enumerate( ids ):
-            id_list[i] = tu[0]
-        return id_list
+        ids = session.query(PersonVj.id).all()
+        ids = combain_list(ids)
+        return ids
 
 
     def get_ids_from_ty(self, ty):
@@ -754,13 +656,8 @@ class LookPers(object):
 
 
 def find_sun_data(evid):
-    sql = _sql.SQL_SUN.FIND_FROM_EVID(evid)
-    datas = testSql.find_some(sql)
-    if datas:
-        data1 = datas[0]
-    else:
-        data1 = None
-    return  sun.Sun(*data1) if data1 else None
+    sunobj = session.query(Sun).filter(Sun.evId==evid).first()
+    return sunobj if sunobj else None
 
 class AllSun(object):
     def __init__(self):
@@ -772,10 +669,10 @@ class AllSun(object):
     def get_per_sun_evIds(self):
         if curper:
             perid = curper.id
-            datas = testSql.find_some(_sql.SQL_SUN.FIND_EVIDS_FROM_PERID(perid))
-            evids = None
+            datas = session.query(Sun.evId).filter(Sun.nameId==perid).all()
+            evids =[]
             if datas:
-                evids = [ tu[0] for tu in datas]
+                evids =combain_list(datas)
             return evids
 
 
@@ -785,8 +682,6 @@ class TMYData(object):
     def __init__(self):
         self.huoDit = many_huos.get_id_ty_dict() # id:ty
 
-    # def initData(self):
-    #     self.huoDit = many_huos.get_id_ty_dict()
 
     def _getSomeDay(self, nday):
         today = datetime.date.today()
@@ -809,10 +704,9 @@ class TMYData(object):
 
     def getDaysData(self, evs=None):
         if evs is None:
-            tus = find_all_evs()
             evs = []
-            for i in tus:
-                evs.append(EvVj(*i))
+            for ev in find_all_evs():
+                evs.append(ev)
         _dit = {}
         for ev in evs:
             idate = ev.crdate.split()[0]  # mok

@@ -423,36 +423,27 @@ class NewEv2Ui(QDialog):
         return val
 
     def clicked_ok(self):
-        val_lit = [None]*9
-        val_lit[0] = self.perObj.id
-        val_lit[1] = int( self.chuobox.currentText().__str__())
-        val_lit[2] = self.get_widget_numVal(self.csh)
-        val_lit[3] = self.get_widget_numVal(self.cfa)
-        val_lit[4] = self.get_widget_numVal(self.csun)
-        val_lit[5] = self.get_widget_numVal(self.cla)
-        val_lit[6] = self.get_widget_numVal(self.cmoney, float)
-        val_lit[7] = gcl.qdateToSdate_andTime( self.cdate.date() )
-        val_lit[8] = self.ctext.toPlainText().trimmed().__str__()
+        val_lit = [None]*10
+        val_lit[1] = self.perObj.id
+        val_lit[2] = int( self.chuobox.currentText().__str__())
+        val_lit[3] = self.get_widget_numVal(self.csh)
+        val_lit[4] = self.get_widget_numVal(self.cfa)
+        val_lit[5] = self.get_widget_numVal(self.csun)
+        val_lit[6] = self.get_widget_numVal(self.cla)
+        val_lit[7] = self.get_widget_numVal(self.cmoney, float)
+        val_lit[8] = gcl.qdateToSdate_andTime( self.cdate.date() )
+        val_lit[9] = self.ctext.toPlainText().trimmed().__str__()
 
-        # print val_lit
-        # return
-        if None in val_lit:
+        if None in val_lit[1:]:
             return
 
         newev = EvVj(*val_lit)
-        # save to sql
         if self.evObj:  # 修改事件
-            # val_lit.append(self.evObj.id)
-            # modlevj.mod_ev(*val_lit)
+            newev.id = self.evObj.id
             self.evObj.mod(newev)
         else:  # 新建事件
-            # modlevj.new_evAuto(*val_lit)
             newev.add()
-
         self.accept()
-
-    # def clicked_cancel(self):
-    #     print 'cancel'
 
 
 if __name__ == '__main__':
