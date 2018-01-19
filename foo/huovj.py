@@ -2,6 +2,7 @@
 
 from sqlbase import *
 import datetime
+
 __author__ = 'Administrator'
 '''
 
@@ -31,6 +32,12 @@ class HuoVj(Base):
         if None == crdate:
             self.crdate = datetime.date.today()
 
+    def add(self):
+            add_data(self)
+    def mod(self, new):
+        mod_data(new)
+    def delself(self):
+        del_data(self)
 
     def __str__(self):
         return '.'.join(str(i) for i in [

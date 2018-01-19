@@ -32,6 +32,12 @@ class Sun(Base):
         self.namdId = namdId
         self.crdate = crdate
 
+    def add(self):
+        add_data(self)
+    def mod(self, new):
+        mod_data(new)
+    def delself(self):
+        del_data(self)
     def __str__(self):
         pass
 

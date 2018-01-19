@@ -3,6 +3,7 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from foo import modlevj
 from foo import gcl
+from foo.evvj import EvVj
 
 from ui import middle_control
 QTextCodec.setCodecForTr(QTextCodec.codecForName('utf8'))
@@ -392,7 +393,7 @@ class NewEv2Ui(QDialog):
         if  DEBUG:
             imoney = 0.0
         else:
-            imoney = ish * self.huoObj.pay
+            imoney = ish * self.huoObj.pay if self.huoObj else 0.0
         if ival != None:
             imoney = ival
         self.cmoney.setText(str(imoney))
@@ -438,12 +439,15 @@ class NewEv2Ui(QDialog):
         if None in val_lit:
             return
 
+        newev = EvVj(*val_lit)
         # save to sql
         if self.evObj:  # 修改事件
-            val_lit.append(self.evObj.id)
-            modlevj.mod_ev(*val_lit)
+            # val_lit.append(self.evObj.id)
+            # modlevj.mod_ev(*val_lit)
+            self.evObj.mod(newev)
         else:  # 新建事件
-            modlevj.new_evAuto(*val_lit)
+            # modlevj.new_evAuto(*val_lit)
+            newev.add()
 
         self.accept()
 
