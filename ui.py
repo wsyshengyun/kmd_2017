@@ -319,7 +319,7 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
                 # print u"个人ev数: %d" % len(evs)
                 evs.sort( key=lambda x_ev: x_ev.id, reverse=True )
                 # print len(evs)
-                self.bt_evTable.insert_evs( evs )
+                self.bt_evTable.insert_data( evs )
                 self.set_evTable_textcolor_from_sunInfo( )
 
             self.bt_ownTable.insert_data( modlevj.perwork.get_ownNums( ) )  # own 表格
@@ -496,7 +496,7 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
             evs = modlevj.perwork.allEvs
         if evs:
             evs.sort(key=lambda x_ev: x_ev.id, reverse=True)
-            self.bt_evTable.insert_evs( evs )
+            self.bt_evTable.insert_data( evs )
             self.set_evTable_textcolor_from_sunInfo( )
             # allsun = modlevj.AllSun( )
             # evids = allsun.get_per_sun_evIds( )

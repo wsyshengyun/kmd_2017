@@ -88,11 +88,9 @@ class Ui_per(QDialog, per.Ui_Dialog):
                 bz=bz, bLine=onLine)
         # save
         if self.per:  # 修改人物， 下面保存修改
-            # modlevj.mod_person(name,adress, phone,onLine, crdate, bz, self.per._id)
             newper.id = self.per.id
             self.per.mod(newper)
         else:  # 新建的人物
-            # modlevj.new_person(name, adress, phone, onLine, crdate, bz)
             newper.add()
         self.accept()
 

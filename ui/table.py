@@ -164,9 +164,12 @@ class BaseTable(object):
             self.row = ilen
             self.table.setRowCount(ilen)
             # for irow in range(self.row):
+            # print datas[0]
+            lenObj = len(datas[0].toList())
             for irow in range(len(datas)):
-                for icol in range(len(datas[0])):
-                    data = datas[irow][icol]
+                objlist = datas[irow].toList()
+                for icol in range(lenObj):
+                    data = objlist[icol]
                     qtext_data = QString(unicode(data))
                     item = QTableWidgetItem(qtext_data)
                     self.table.setItem(irow, icol, item)
@@ -175,9 +178,6 @@ class BaseTable(object):
         datas = convert_obj_to_tsrs( evs )
         self.insert_data(datas)
 
-    def insert_pers(self, pers):
-        datas = convert_obj_to_tsrs(pers)
-        self.insert_data(datas)
 
 
     def replace_column_data(self, where_column, objective_list):
@@ -188,7 +188,6 @@ class HuoTable(BaseTable):
     headList = [u'编号', u'类型', u'比率', u'标称数量',
             u'有效', u'带腊', u'日期', u'备注',
             u'发数量', u'未交数量', u'损耗数量']
-    # width = [30, 50, 50, 60, 30, 30, 80, 120, 80, 80, 80]
 
     def __init__(self, table):
         super(HuoTable, self).__init__(table)

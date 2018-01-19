@@ -31,6 +31,8 @@ class HuoVj(Base):
         self.crdate = crdate
         if None == crdate:
             self.crdate = datetime.date.today()
+    def toList(self):
+        return self.id, self.ty, self.pay, self.nums, self.bvalid, self.bLa, self.crdate, self.bz
 
     def add(self):
             add_data(self)
