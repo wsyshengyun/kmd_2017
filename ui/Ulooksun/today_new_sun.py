@@ -23,7 +23,10 @@ class Ui_sun(QDialog, ui_only.Ui_Dialog):
     def update(self):
         if modlevj.curper:
             sumdata = modlevj.search_sun_sum()
-            datas = modlevj.search_sun()
+            sunobjs = modlevj.search_sun()
+            datas = []
+            for obj in sunobjs:
+                datas.append(obj.toList())
             datas = datas[::-1]
             sumdata.extend(datas)
             self.btable.insert_data(sumdata)

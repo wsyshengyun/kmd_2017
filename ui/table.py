@@ -155,7 +155,7 @@ class BaseTable(object):
     def gs_setNoVerticalHeader(self):
         self.table.verticalHeader.setVisible(False)
 
-    def insert_data(self, datas):
+    def insert_obj(self, datas):
         ilen = len(datas)
         if not ilen: return
         else:
@@ -174,10 +174,24 @@ class BaseTable(object):
                     item = QTableWidgetItem(qtext_data)
                     self.table.setItem(irow, icol, item)
 
-    def insert_evs(self, evs):
-        datas = convert_obj_to_tsrs( evs )
-        self.insert_data(datas)
 
+
+    def insert_data(self, datas):
+        ilen = len(datas)
+        if not ilen: return
+        else:
+            self.clear()
+            self.set_head()
+            self.row = ilen
+            self.table.setRowCount(ilen)
+            lenObj = len(datas[0])
+            for irow in range(len(datas)):
+                objlist = datas[irow]
+                for icol in range(lenObj):
+                    data = objlist[icol]
+                    qtext_data = QString(unicode(data))
+                    item = QTableWidgetItem(qtext_data)
+                    self.table.setItem(irow, icol, item)
 
 
     def replace_column_data(self, where_column, objective_list):
@@ -239,7 +253,7 @@ class EvTable(BaseTable):
                     item.setBackgroundColor(Qt.white)
 
     def insert_evs(self, evs):
-        super(EvTable, self).insert_evs(evs)
+        super(EvTable, self).insert_obj(evs)
         self.set_cellDate_color()
 
 

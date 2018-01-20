@@ -114,7 +114,7 @@ class Ui_look_per(QDialog, ui_look_per.Ui_Dialog):
             ids_somed = self.look.get_samed_ids(ids_adr, ids_ty, ids_line)
             if ids_somed:
                 ids_somed.sort(reverse=True)
-                self.table.insert_data( self.look.get_pers_from_ids(ids_somed) )
+                self.table.insert_obj( self.look.get_pers_from_ids(ids_somed) )
 
             self.set_lab_rowNums( )
 

@@ -54,7 +54,7 @@ class Ui_look_huo(QDialog, ui_look_huo.Ui_Dialog):
         self.table.clear()
         self.table.init()
         datas = modlevj.find_all_huos()
-        self.table.insert_data(datas)
+        self.table.insert_obj(datas)
 
     def btn_clicked(self):
         btnText = self.focusWidget().text().__str__()
