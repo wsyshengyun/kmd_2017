@@ -16,8 +16,6 @@ class Ui_set(QDialog, ui_set.Ui_Dialog):
 
     def setQDateEdit(self):
         d1, d2 = modlevj.d1, modlevj.d2
-        # qd1 = QDate.fromString(d1, Qt.ISODate)
-        # qd2 = QDate.fromString(d2, Qt.ISODate)
         qd1 = gcl.strDateToQdate(d1)
         qd2 = gcl.strDateToQdate(d2)
 
@@ -34,7 +32,5 @@ class Ui_set(QDialog, ui_set.Ui_Dialog):
             return
         d1 = gcl.qdateToUdate(qd1)
         d2 = gcl.qdateToUdate(qd2)
-        modlevj.set_d1_d2(d1, d2)
-        modlevj.update_date_setSql(u'd1', d1)
-        modlevj.update_date_setSql(u'd2', d2)
+        modlevj.setD1D2((d1, d2))
         self.accept()

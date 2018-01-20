@@ -32,7 +32,7 @@ FONT_LA = QFont(u'黑体', 10, QFont.Bold)
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
-        Dialog.resize(800, 500)
+        Dialog.resize(500, 500)
         self.move(0, 0)
         Dialog.setWindowFlags(Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint |
             Qt.CustomizeWindowHint)

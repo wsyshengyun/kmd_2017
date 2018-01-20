@@ -300,6 +300,7 @@ class NewEv2Ui(QDialog):
         self.cdate.setDate(tempDate)
         # set huobox items
         huo_ids = modlevj.get_huo_valid_ids()
+
         huo_ids = gcl.insertFistPlace(tempId, huo_ids) if tempId else huo_ids
         middle_control.setComBoxValue(self.chuobox, huo_ids)
 

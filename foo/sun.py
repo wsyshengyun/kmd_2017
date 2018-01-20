@@ -19,19 +19,22 @@ class Sun(Base):
     c_ts= Column(Float)
     crdate= Column(Text)
 
-    def __init__(self, id, namdId, evId, zhi, quan, dai, la, kmd, zhu, tiesi, crdate):
+    def __init__(self, id, namdId, evId, c_zhi, c_quan, c_dai, c_la, c_kmd, c_zhu, c_ts, crdate):
         self.id = id
-        self.evId = evId
-        self.tiesi = tiesi
-        self.zhu = zhu
-        self.kmd = kmd
-        self.la = la
-        self.dai = dai
-        self.quan = quan
-        self.zhi = zhi
         self.namdId = namdId
+        self.evId = evId
+        self.c_zhi = c_zhi
+        self.c_quan = c_quan
+        self.c_dai = c_dai
+        self.c_la = c_la
+        self.c_kmd = c_kmd
+        self.c_zhu = c_zhu
+        self.c_ts = c_ts
         self.crdate = crdate
-
+    def toList(self):
+        return self.id, self.nameId, self.evId, self.c_zhi, self.c_quan, \
+                self.c_dai, self.c_la, self.c_kmd, self.c_zhu, self.c_ts, \
+                self.crdate
     def add(self):
         add_data(self)
     def mod(self, new):

@@ -6,27 +6,17 @@ from sun import Sun
 from evvj import  EvVj, Xev, Xev_expand
 import  gcl
 from sqlbase import *
-import _sql
+# import _sql
 import datetime
 import os
 
-__author__ = 'Wsy'
-'''
-1, 如何添加帮助信息?
-
-'''
 IS_WINDOWS = True
 if os.name != 'nt':
     IS_WINDOWS = False
 
-# set sql
 class Set1(Base):
     __tablename__ = 'set'
-    @classmethod
-    def set_d1d2(cls, d1, d2):
-        dit = {'name':d1, 'val':d1}
-        session.add(self)
-        session.commit()
+    __table_args__ = {"useexisting": True}
     name = Column(Text, primary_key=True)
     val = Column(Text)
 
@@ -46,51 +36,41 @@ if not IS_WINDOWS:
     test_dbpath = "/home/pi/.data/test_kmdkmd.db"
     default_db_path = "/home/pi/.data/kmdkmd.db"
 curpath = default_db_path
-# testSql =  _sql.TestSql(path = curpath)
 
 curper = None
 curdate = str(datetime.date.today())
 
-
-# def create_sqlAndTab_ifNotExist():
-    # testSql.create_many_table( _sql.sqlCreate_tabs_list )
-
-# create_sqlAndTab_ifNotExist()
-
-
-
-def setDefD1D2():
-    tu_ = (u'2015-01-01', u'2100-12-12')
-    newd1 = Set1(name='d1', val=tu_[0])
-    newd2 = Set1(name='d2', val=tu_[1])
-    session.add(newd1)
-    session.add(newd2)
-    session.commit()
-    return tu_
+# ***************************************************************设置数据
+def setD1D2(tud1d2=None):
+    if tud1d2 is None:
+        tud1d2 = u'2015-01-01', u'2100-12-12'
+        newd1 = Set1(name='d1',val= tud1d2[0])
+        newd2 = Set1(name='d2', val= tud1d2[1])
+        add_data(newd1)
+        add_data(newd2)
+    else:
+        newd1 = Set1(name='d1',val= tud1d2[0])
+        newd2 = Set1(name='d2', val= tud1d2[1])
+        mod_data(newd1)
+        mod_data(newd2)
+    return d1, d2
 
 def find_d1d2_setSql1():
     try:
         find_d1 = session.query(Set1.val).filter(Set1.name=='d1').first()
         find_d2 = session.query(Set1.val).filter(Set1.name=='d2').first()
         if find_d1 is None or find_d2 is None:
-            find_d1, find_d2 = setDefD1D2()
+            find_d1, find_d2 = setD1D2()
         else:
             find_d1 = find_d1[0]
             find_d2 = find_d2[0]
         return find_d1, find_d2
     except IndexError:
-        return setDefD1D2()
+        return setD1D2()
 
-
-
-
-
-d1 = None
-d2 = None
 
 d1,d2 = find_d1d2_setSql1()
 
-# ***************************************************************qita
 def get_adresss():
     adrs= session.query(PersonVj.adress).all()
     adr_set = set(adrs)
@@ -101,7 +81,6 @@ def get_adresss():
 
 
 
-
 class ManyPerVj(BaseMany):
     def __init__(self):
         super(ManyPerVj, self).__init__()
@@ -109,7 +88,6 @@ class ManyPerVj(BaseMany):
 
 
     def init_data(self):
-        # self.lit = []
         self.names = {}
         self.id_names = {}
         self.real_name_pers = {}
@@ -161,41 +139,24 @@ up_manyPers( )
 
 print '<modlevj>'
 
-# ***************************************************************货物
 
 def find_all_huos():
     return session.query(HuoVj).all()
 
 def get_huoTys():
     _datas = session.query(HuoVj.ty).all()
-    tylist = combain_list(_datas)
-    tys_set = set(tylist)
-    return list(tys_set)
+    tys_set = set(_datas)
+    return combain_list(list(tys_set))
 
 def get_huo_valid_ids():
     _datas = session.query(HuoVj.id).filter(HuoVj.bvalid==1).all()
-    huoid_lit = combain_list(_datas)
-    huoid_lit.sort( reverse=True)
-    return huoid_lit
+    _datas.sort( reverse=True)
+    return combain_list( _datas)
 
 
-# ***************************************************************事件
 
 def find_all_evs():
     return session.query(EvVj).all()
-
-
-# ***************************************************************损耗
-
-
-# def new_sunAuto(nameId, evId, c_zhi, c_quan, c_dai, c_la, c_kmd, c_zhu, c_ts, crdate):
-    # datas = [(nameId, evId,  c_zhi, c_quan, c_dai, c_la, c_kmd, c_zhu, c_ts, crdate)]
-    # testSql.insert(_sql.SQL_SUN.INSERT_AUTO, datas)
-
-
-# def mod_sun(id, nameId, evId, c_zhi, c_quan, c_dai, c_la, c_kmd, c_zhu, c_ts, crdate):
-    # datas = [(nameId, evId, c_zhi, c_quan, c_dai, c_la, c_kmd, c_zhu, c_ts, crdate, id)]
-    # testSql.update(_sql.SQL_SUN.UPDATE, datas)
 
 
 # ***************************************************************主界面
@@ -222,13 +183,14 @@ def search_evs_from_date():
 def search_sun(nameId=None, d1=d1, d2=d2):
     if None == nameId and curper is not None:
         nameId = curper.id
-    return session.query(Sun).filter(and_((Sun.nameId==nameId,Sun.crdate>d1, Sun.crdate<d2))).all()
+    objs = session.query(Sun).filter(and_(Sun.nameId==nameId, Sun.crdate>d1, Sun.crdate<d2)).all()
+    return objs
 
 def search_sun_sum(nameId=None):
     if None == nameId and curper is not None: nameId = curper.id
-    SQL = _sql.SQL_SUN
-    return testSql.find_some(SQL.FIND_SUM_DATA(nameId))
-
+    sql = '''select count(id), 0, 0, sum(c_zhi), sum(c_quan), sum(c_dai), sum(c_la), sum(c_kmd), sum(c_zhu),
+                    sum(c_ts), 0 from sunc where nameId={}'''.format(nameId)
+    return session.execute(sql).fetchall()
 
 
 
@@ -303,6 +265,7 @@ class PerWork(object):
 
     def init_data(self):
         self.hid_Xevs = {}
+        # self.hid_ownNum = []
         self.hid_ownEvs = {}
         self.hid_evs = {}
         self.allEvs = []
@@ -328,7 +291,7 @@ class PerWork(object):
 
     def up_allEVs_from_sql(self, id=None):
         default_id = id
-        if None ==default_id:
+        if None == default_id:
             default_id = curper.id
         for ev in search_evs_only(default_id):
             self.add_ev(ev)
@@ -362,8 +325,6 @@ class PerWork(object):
                     if xev.is_own_0(): self.hid_ownEvs.pop(hid)
                 else:
                     self.hid_ownEvs = {}
-
-
 
 
     def get_ownNums(self):
@@ -455,8 +416,6 @@ def up_perwork():
         perwork.up_allEVs_from_sql( )
         perwork.up_ownEvs( )
         perwork.get_ownNums()
-        # for ev in  perwork.hid_evs[108]:
-        #     print ev.id, ev.sh, ev.fa
 
 
 
@@ -488,9 +447,6 @@ class EvsMethod(object):
 import gcl
 class AllEvs(object):
     def __init__(self):
-        # self.allevs = []
-        # self.pid_xevExpand_Dict = {}
-        # self.xevEXpand = Xev_expand()
         self.init_data()
 
         Xev_expand.set_dict(
@@ -504,8 +460,8 @@ class AllEvs(object):
 
 
     def up_all_evs(self):
-        for ev in find_all_evs():
-            self.allevs.append(ev)
+        for evobj in find_all_evs():
+            self.allevs.append(evobj)
 
     def get_xevExpand(self):
         if self.allevs:
@@ -579,7 +535,6 @@ class AllEvs(object):
                         tu[1].hid_dict[huoId].get_own(),
                         gcl.days_distance_today_M(tu[1].hid_dict[huoId].
                         last_ev.crdate)] for tu in own_list] # mok
-        # return self.format_own_days_names(result_list)
         return result_list
 
 
@@ -593,7 +548,6 @@ class AllEvs(object):
 class LookPers(object):
     def __init__(self):
         self.init_data()
-        # self.manyPer = many_pers
 
     def init_data(self):
         self.allevs = AllEvs()
@@ -609,25 +563,20 @@ class LookPers(object):
 
     def get_ids_from_adr(self, adr=None):
         if adr != '':
-            ids = session.query(PersonVj.id).filter(PersonVj.adress==adr).all()
+            ids = session.query(PersonVj.id).filter(PersonVj.adress==adr)
         else:
             ids = session.query(PersonVj.id).all()
-        ids = combain_list(ids)
-        return ids
-
+        return combain_list(ids)
 
     def get_ids_from_bLine(self, bline=None):
-        if bline > 0:
-            ids = session.query(PersonVj.id).filter(PersonVj.bLine==1).all()
+        if bline != None:
+            ids = session.query(PersonVj.id).filter(PersonVj.bLine==1)
         else:
             ids = session.query(PersonVj.id).all()
-        ids = combain_list(ids)
-        return ids
+        return combain_list(ids)
 
     def get_all_ids(self):
-        ids = session.query(PersonVj.id).all()
-        ids = combain_list(ids)
-        return ids
+        return combain_list(session.query(PersonVj.id).all())
 
 
     def get_ids_from_ty(self, ty):
@@ -669,11 +618,8 @@ class AllSun(object):
     def get_per_sun_evIds(self):
         if curper:
             perid = curper.id
-            datas = session.query(Sun.evId).filter(Sun.nameId==perid).all()
-            evids =[]
-            if datas:
-                evids =combain_list(datas)
-            return evids
+            evids = session.query(Sun.evId).filter(Sun.nameId==perid).all()
+            return combain_list(evids)
 
 
 
@@ -704,8 +650,9 @@ class TMYData(object):
 
     def getDaysData(self, evs=None):
         if evs is None:
+            _evs = find_all_evs()
             evs = []
-            for ev in find_all_evs():
+            for ev in _evs:
                 evs.append(ev)
         _dit = {}
         for ev in evs:
@@ -727,7 +674,6 @@ class TMYData(object):
                 _dit[idate][ity] = xev
                 # print xev
         return _dit
-        # '2017-01-01':'包装':xev
 
 
     def format_dit(self, xevDit, ty):

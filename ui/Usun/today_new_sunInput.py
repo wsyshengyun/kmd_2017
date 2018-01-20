@@ -49,13 +49,13 @@ class Ui_SunInput(QDialog, ui_sunInput.Ui_Dialog):
         if obj:
             self.cid.setText(str(obj.id))
             tem_date = gcl.strDateTimeToQdate(obj.crdate)
-            self.cb_zhi.setText(str(obj.zhi))
-            self.cb_quan.setText(str(obj.quan))
-            self.cb_dai.setText(str(obj.dai))
-            self.cb_la.setText(str(obj.la))
-            self.cb_kmd.setText(str(obj.kmd))
-            self.cq_zhu.setText(str(obj.zhu))
-            self.cq_tiesi.setText(str(obj.tiesi))
+            self.cb_zhi.setText(str(obj.c_zhi))
+            self.cb_quan.setText(str(obj.c_quan))
+            self.cb_dai.setText(str(obj.c_dai))
+            self.cb_la.setText(str(obj.c_la))
+            self.cb_kmd.setText(str(obj.c_kmd))
+            self.cq_zhu.setText(str(obj.c_zhu))
+            self.cq_tiesi.setText(str(obj.c_ts))
 
         else:
             tem_date = middle_control.getCurrentDate()
@@ -94,20 +94,20 @@ class Ui_SunInput(QDialog, ui_sunInput.Ui_Dialog):
         return intVal
 
     def slot_btn_sure(self):
-        val_lit = [None]*10
+        val_lit = [None]*11
 
-        val_lit[0] =modlevj.curper.id if modlevj.curper else None
-        val_lit[1] = self.evId
-        val_lit[2] = self.get_editText_int_val( self.cb_zhi )
-        val_lit[3] = self.get_editText_int_val( self.cb_quan )
-        val_lit[4] = self.get_editText_int_val( self.cb_dai )
-        val_lit[5] = self.get_editText_int_val( self.cb_la )
-        val_lit[6] = self.get_editText_int_val( self.cb_kmd )
-        val_lit[7] = self.get_editText_int_val( self.cq_zhu )
-        val_lit[8] = self.get_editText_float_val( self.cq_tiesi )
-        val_lit[9] = val_date = gcl.qdateToUdate( self.dateEdit.date() )
+        val_lit[1] =modlevj.curper.id if modlevj.curper else None
+        val_lit[2] = self.evId
+        val_lit[3] = self.get_editText_int_val( self.cb_zhi )
+        val_lit[4] = self.get_editText_int_val( self.cb_quan )
+        val_lit[5] = self.get_editText_int_val( self.cb_dai )
+        val_lit[6] = self.get_editText_int_val( self.cb_la )
+        val_lit[7] = self.get_editText_int_val( self.cb_kmd )
+        val_lit[8] = self.get_editText_int_val( self.cq_zhu )
+        val_lit[9] = self.get_editText_float_val( self.cq_tiesi )
+        val_lit[10] = val_date = gcl.qdateToUdate( self.dateEdit.date() )
 
-        if None in val_lit:
+        if None in val_lit[1:]:
             return
         newsun = Sun(*val_lit)
         # 保存
