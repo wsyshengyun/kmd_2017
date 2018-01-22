@@ -175,7 +175,9 @@ def search_evs_only(pid):
     return session.query(EvVj).filter(EvVj.nameId==pid).all()
 
 def search_evs_from_date():
-    return session.query(EvVj).filter(EvVj.crdate<d2).filter(EvVj.crdate>d1).all()
+    print curdate
+    return session.query(EvVj).filter( EvVj.crdate.like('%{}%'.format(curdate))).all()
+    # return session.query(EvVj).filter(EvVj.crdate<d2).filter(EvVj.crdate>d1).all()
 
 
 

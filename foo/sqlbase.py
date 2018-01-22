@@ -4,7 +4,7 @@ from sqlalchemy import or_, and_
 from sqlalchemy.orm import sessionmaker, relationship
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = create_engine("sqlite:///kmdkmd.db", echo=False)
+engine = create_engine("sqlite:////home/pi/kmdkmd.db", echo=False)
 #engine = create_engine("sqlite:///:memory:", echo=True)
 Base = declarative_base(engine)
 Session = sessionmaker(engine)

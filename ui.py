@@ -430,6 +430,7 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
         self.row_rect =  newrect
 
     def slot_date_finished(self):
+        print 'slot_date_finished'
         modlevj.curdate = gcl.qdateToSDate(self.cdate.date())
         # modlevj.datework.up_date_data()
         modlevj.up_datework()
