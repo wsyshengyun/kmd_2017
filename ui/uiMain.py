@@ -6,8 +6,9 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+# from PyQt4.QtGui import *
+# from PyQt4.QtCore import *
+from middle_control import *
 
 try:
     _fromUtf8 = QString.fromUtf8
@@ -61,7 +62,7 @@ class Ui_Dialog(object):
         self.newPerBtn = QPushButton(Dialog)
         self.cAddev = QPushButton(Dialog)
         self.chuobox = QComboBox(Dialog)
-        self.cdate = QDateEdit(Dialog)
+        self.cdate = MDateEdit(Dialog)
         self.cdate.setContextMenuPolicy(Qt.CustomContextMenu)
         self.cdate.setAutoFillBackground(False)
         self.cdate.setCurrentSection(QDateTimeEdit.DaySection)

@@ -19,12 +19,10 @@ class Set1(Base):
 
 '''new'''
 Base.metadata.create_all(engine)
-
 version = 'v1.2'
 curpath = path
-
 curdate = str(datetime.date.today())
-
+curper = None
 # ***************************************************************设置数据
 def setD1D2(*tud1d2):
     global d1, d2
@@ -83,7 +81,6 @@ class ManyPerVj(BaseMany):
         self.id_perObj = {}
 
     def getOwnPerNames():
-       # TODO
         return []
 
     def up_data(self):
@@ -109,9 +106,6 @@ class ManyPerVj(BaseMany):
             self.id_names[per.id] = per.name
             self.id_perObj[per.id] = per
             self.real_name_pers[per.name] = per
-
-    # def get_adrs(self):
-        # return get_adresss()
 
 
 def up_manyPers():

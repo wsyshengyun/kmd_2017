@@ -2,12 +2,13 @@
 import sys
 sys.path.append("/home/pi/kmdVj/ui")
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+# from PyQt4.QtGui import *
+# from PyQt4.QtCore import *
 from ui import table
 from ui import mycolor
 from ui import middle_control
 from ui import uiMain
+from ui.uiMain import  *
 
 import re
 from foo import modlevj

@@ -125,7 +125,7 @@ class NewEv2Ui(QDialog):
         lab_money = QLabel(self.tr('付钱'))
         lab_sun = QLabel(self.tr('损耗'))
         self.lab_la = QLabel(self.tr('蜡'))
-        self.cdate = QDateEdit()
+        self.cdate = middle_control.MDateEdit()
         self.cdate.setCalendarPopup(True)
         self.cdate.setFixedHeight(CONTROL_HEIGHT)
         self.cdate.setFont(QFont('Arial', 12, QFont.Bold))

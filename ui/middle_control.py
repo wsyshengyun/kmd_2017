@@ -76,3 +76,13 @@ class B_Widget_expand(B_Widget):
 
                 if event.type() == QEvent.FocusOut:
                     bw.set_focusOut_color()
+
+
+
+class MDateEdit(QDateEdit):
+    def __init__(self, parent = None):
+        super(MDateEdit, self).__init__(parent)
+        self.setDisplayFormat("yyyy/MM/dd")
+        self.setCalendarPopup(True)
+
+
