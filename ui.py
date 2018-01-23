@@ -125,7 +125,7 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
         # icon = QPixmap('ui\search.png')
         # self.findBtn.setIcon(icon)
         # self.findBtn.setFixedSize(icon.size())
-        self.findBtn.setStyleSheet("QPushButton{border-image:url(./src/isearch.png); background:transparent;} QPushButton:hover{border-image:url(./search.png)}  QPushButton:pressed{border-image:url(./search.png)}");
+        self.findBtn.setStyleSheet("QPushButton{border-image:url(./src/search.png); background:transparent;} QPushButton:hover{border-image:url(./search.png)}  QPushButton:pressed{border-image:url(./search.png)}");
 
         margins = self.findName.textMargins()
         self.findName.setTextMargins(margins.left(), margins.top(), self.findBtn.width(), margins.bottom())

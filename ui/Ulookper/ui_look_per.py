@@ -73,7 +73,6 @@ class Ui_Dialog(object):
         grid.addWidget(self.csure, 1, 4)
         grid.addWidget(self.ct_view, 2, 0, 1, 5)
 
-        print grid.cellRect(2, 0)
 
 
         self.retranslateUi(Dialog)

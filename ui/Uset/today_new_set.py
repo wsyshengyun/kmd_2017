@@ -32,5 +32,5 @@ class Ui_set(QDialog, ui_set.Ui_Dialog):
             return
         d1 = gcl.qdateToUdate(qd1)
         d2 = gcl.qdateToUdate(qd2)
-        modlevj.setD1D2((d1, d2))
+        modlevj.setD1D2(d1, d2)
         self.accept()
