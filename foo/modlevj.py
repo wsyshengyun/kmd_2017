@@ -8,11 +8,6 @@ import  gcl
 from sqlbase import *
 # import _sql
 import datetime
-import os
-
-IS_WINDOWS = True
-if os.name != 'nt':
-    IS_WINDOWS = False
 
 class Set1(Base):
     __tablename__ = 'set'
@@ -20,37 +15,30 @@ class Set1(Base):
     name = Column(Text, primary_key=True)
     val = Column(Text)
 
-def set_d1d2(d1, d2):
-    objset1 = Set1('d1', d1)
-    objset2 = Set1('d2', d2)
-    add_data((objset1, objset2))
 
 
 '''new'''
 Base.metadata.create_all(engine)
 
 version = 'v1.2'
-test_dbpath = "E:\\_Wsy\\kmdkmd.db"
-default_db_path = "E:\\kmdkmd.db"
-if not IS_WINDOWS:
-    test_dbpath = "/home/pi/.data/test_kmdkmd.db"
-    default_db_path = "/home/pi/.data/kmdkmd.db"
-curpath = default_db_path
+curpath = path
 
-curper = None
 curdate = str(datetime.date.today())
 
 # ***************************************************************设置数据
-def setD1D2(tud1d2=None):
+def setD1D2(*tud1d2):
+    global d1, d2
     if tud1d2 is None:
-        tud1d2 = u'2015-01-01', u'2100-12-12'
-        newd1 = Set1(name='d1',val= tud1d2[0])
-        newd2 = Set1(name='d2', val= tud1d2[1])
+        d1, d2  = u'2015-01-01', u'2100-12-12'
+        newd1 = Set1(name='d1',val= d1)
+        newd2 = Set1(name='d2', val= d2)
         add_data(newd1)
         add_data(newd2)
     else:
-        newd1 = Set1(name='d1',val= tud1d2[0])
-        newd2 = Set1(name='d2', val= tud1d2[1])
+        d1,  d2 = tud1d2
+        newd1 = Set1(name='d1',val= d1)
+        newd2 = Set1(name='d2', val= d2)
+        print newd1, newd2
         mod_data(newd1)
         mod_data(newd2)
     return d1, d2
@@ -73,6 +61,7 @@ d1,d2 = find_d1d2_setSql1()
 
 def get_adresss():
     adrs= session.query(PersonVj.adress).all()
+    adrs = combain_list(adrs)
     adr_set = set(adrs)
     net_adrs = list(adr_set)
     # 对地址进行按字母排序
@@ -121,8 +110,8 @@ class ManyPerVj(BaseMany):
             self.id_perObj[per.id] = per
             self.real_name_pers[per.name] = per
 
-    def get_adrs(self):
-        return get_adresss()
+    # def get_adrs(self):
+        # return get_adresss()
 
 
 def up_manyPers():
@@ -175,7 +164,6 @@ def search_evs_only(pid):
     return session.query(EvVj).filter(EvVj.nameId==pid).all()
 
 def search_evs_from_date():
-    print curdate
     return session.query(EvVj).filter( EvVj.crdate.like('%{}%'.format(curdate))).all()
     # return session.query(EvVj).filter(EvVj.crdate<d2).filter(EvVj.crdate>d1).all()
 
@@ -235,9 +223,6 @@ class ManyHuos(object):
 
 
 
-    def test_print_huo(self):
-        for huo in self.all_huos:
-            print huo
 
     def get_id_ty_dict(self):
         lit = [ (tu[0], tu[1].ty)   for tu in self.id_obj_dict.items() ]
