@@ -163,30 +163,6 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
         self.slotFindNameBtnClicked()
         self.slot_add_ev()
 
-#    def save_findnameText_to_pickle(self):
-#        nameQstr = self.findName.text()
-#        self.nametempList = self.nametempList[:9] # 只保存有限个元素
-#
-#        show(nameQstr)
-#        if nameQstr in self.nametempList:
-#            self.nametempList.remove(nameQstr)
-#        self.nametempList.insert(0, nameQstr)
-#        self.pickle_dump()
-#        self.set_cobName_from_tempNameList()
-
-
-    # 查找名字历史缓存
-#    def pickle_dump(self):
-#        with open(pickle_file_path, 'w') as f:
-#            pickle.dump(self.nametempList, f)
-#        pass
-
-#    def pickle_load(self):
-#        with open(pickle_file_path, 'r') as f:
-#            self.nametempList = pickle.load(f)
-#            if not isinstance(self.nametempList, list):
-#                self.nametempList = []
-#        pass
     # 初始化
     def init(self):
         # nameLine
@@ -194,7 +170,7 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
 
         self.bt_evTable = table.EvTable( self.cevTable )
         self.bt_evTable.init( )
-        # self.cevTable.horizontalHeader().setResizeMode(QHeaderView.Stretch)
+        # self.cevTable.horizontalHeaderzontalHeader().setResizeMode(QHeaderView.Stretch)
         # self.cevTable.horizontalHeader().setResizeMode(0, QHeaderView.ResizeToContents)
 
 
@@ -218,9 +194,6 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
 
     def keyPressEvent(self, ekey):
         pass
-        # if ekey.key() == Qt.Key_F3:   # 按下F3键, 添加事件
-        #     print 'F3 is down'
-        #     self.slot_add_ev()
 
 
     def eventFilter(self, obj, event):
@@ -328,6 +301,7 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
             #
             self.cla_own.setText( str( modlevj.perwork.get_la_own( ) ) )
 
+
     # 设置有损耗时,事件的编号颜色为红色
     def set_evTable_textcolor_from_sunInfo(self):
         allsun = modlevj.AllSun( )
@@ -383,7 +357,6 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
     def action_add_sunHao(self):
 
         sunObj = modlevj.find_sun_data(self.evId_tab_selected)
-        # print self.evId_tab_selected
         dialog = Ui_SunInput(sunObj=sunObj, evId=self.evId_tab_selected)
         if dialog.exec_()==QDialog.Accepted:
             self.set_evTable_textcolor_from_sunInfo()
@@ -431,12 +404,9 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
         self.row_rect =  newrect
 
     def slot_date_finished(self):
-        print 'slot_date_finished'
         modlevj.curdate = gcl.qdateToSDate(self.cdate.date())
-        # modlevj.datework.up_date_data()
         modlevj.up_datework()
         self.init_list_widget()
-        # self.set_date_background_color()
         self.cdatedata.setText(QString(modlevj.datework.format_h_xev_to_datedata()))
 
     # 日期改变 事件
