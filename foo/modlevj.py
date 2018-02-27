@@ -8,6 +8,30 @@ import  gcl
 from sqlbase import *
 # import _sql
 import datetime
+import logging
+import sys
+
+logger = logging.getLogger('modlevj_app')
+# 指定logger人输出格式
+formatter = logging.Formatter('%(asctime)s %(filename)s %(levelname)-8s: %(message)s')
+# 文件日志
+file_handler = logging.FileHandler("log/file.log")
+file_handler.setFormatter(formatter) # 可以通过setFormatter指定输出格式
+# file_handler.setLevel(logging.INFO)
+# 控制台日志
+console_handler = logging.StreamHandler(sys.stdout)
+console_handler.formatter = formatter  #也可以直接给formatter 赋值
+console_handler.setLevel(logging.ERROR)
+
+# 为logger添加的日志处理器
+logger.addHandler(file_handler)
+logger.addHandler(console_handler)
+
+# 指定日志的最低输出级别，默认为WARN级别
+logger.setLevel(logging.DEBUG)
+
+
+logger.info(u'进入modlevj模块')
 
 class Set1(Base):
     __tablename__ = 'set'
@@ -36,7 +60,7 @@ def setD1D2(*tud1d2):
         d1,  d2 = tud1d2
         newd1 = Set1(name='d1',val= d1)
         newd2 = Set1(name='d2', val= d2)
-        print newd1, newd2
+        logger.info('设置新的起始日期为{}, 结束日期为{}'.format(newd1, newd2))
         mod_data(newd1)
         mod_data(newd2)
     return d1, d2
@@ -120,7 +144,6 @@ up_manyPers( )
 
 
 
-print '<modlevj>'
 
 
 def find_all_huos():
@@ -137,7 +160,6 @@ def get_huo_valid_ids():
     return combain_list( _datas)
 
 
-
 def find_all_evs():
     return session.query(EvVj).all()
 
@@ -148,6 +170,8 @@ def find_all_evs():
 def search_evs(nameid, huoid):
     datas = session.query(EvVj).filter(EvVj.nameId==nameid).filter(EvVj.huoId==huoid).all()
     return datas
+
+
 
 def search_evs_from_huoId(hid):
     return session.query(EvVj).filter(EvVj.huoId==hid).all()
@@ -363,14 +387,9 @@ class DateWork(object):
         lit = []
         if self.allEvs:
             self.allEvs.sort(key=lambda x_ev: x_ev.id)
-            print '-----print sorted ev id-------'
-            # for ev in self.allEvs:
-            #     print ev.id
             id_names = many_pers.id_names
             for ev in self.allEvs:
-                # print ev.id
                 lit.append(id_names[ev.nameId])
-            # lit = set(lit)
             return gcl.uniq_list(lit)
         else:
             return None
@@ -653,7 +672,6 @@ class TMYData(object):
                 xev.add(ev)
                 _dit[idate] = {}
                 _dit[idate][ity] = xev
-                # print xev
         return _dit
 
 
@@ -690,9 +708,8 @@ class Test(object):
 
 
 if __name__ == '__main__':
-    Session = sessionmaker(engine)
-    session = Session()
-    #print session.query(PersonVj).count()
+    # Session = sessionmaker(engine)
+    # session = Session()
     pass
 
 

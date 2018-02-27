@@ -33,16 +33,9 @@ __author__ = 'Administrator'
 '''
 
 QTextCodec.setCodecForTr(QTextCodec.codecForName('utf8'))
-SHOW=False
 HIDE_HISTORY_NAME = True   # 隐藏历史名字列表
 
-def show(tsr):
-    if SHOW:
-        print u"show=======================" + tsr
 
-def set_show(flg=False):
-    global SHOW
-    SHOW = flg
 
 #import ui_ev
 class B_Menu(object):
@@ -68,12 +61,16 @@ class B_Menu(object):
         self.menu.exec_(QCursor.pos())
 
 
-
-
 class MainUi(QDialog, uiMain.Ui_Dialog):
     def __init__(self, parent=None):
         super(MainUi, self).__init__(parent)
         self.setupUi(self)
+        # self.pickle_load()
+        # self.set_cobName_from_tempNameList()
+        # if len(self.nametempList)>=1:
+        #     name = self.nametempList[0]
+        #     self.findName.setText(name)
+
         self.btnFuncDit = {u'设置': self.date_set,
                            u'查看货物': self.btn_look_huos,
                            u'新建货物': self.btn_new_huo,
@@ -90,20 +87,10 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
         self.bwidget.add_widget(self.findName)
         self.bwidget.install_filter(self)
         self.init()
-        self.move(0,0)
+        self.move(0, 0)
         self.setWindowTitle(modlevj.curpath + ' ' +  modlevj.version)
 
         self.myConnect()
-
-        #
-
-        self.nametempList = []  # 搜索历史名字列表
-        #
-        #self.pickle_load()
-        self.set_cobName_from_tempNameList()
-        # if len(self.nametempList)>=1:
-        #     name = self.nametempList[0]
-        #     self.findName.setText(name)
 
 
         self.findName.installEventFilter(self)
@@ -112,6 +99,7 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
         self.cob_name.currentIndexChanged.connect(self.set_findName_text_from_cobName)
         # connect
         self.cevTable.itemSelectionChanged.connect(self.slot_cevTable_itemSelectionChanged)
+        self.ccheck_find_allNames.stateChanged.connect(self.slot_checkfineall_state_changed)
 
         self.set_search_ico()
 
@@ -145,7 +133,6 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
         text = self.cob_name.currentText()
         self.findName.setText(text)
         self.findName.setFocus()
-        show(u'set findName text')
 
     def set_cobName_from_tempNameList(self):
         word = QStringList()
@@ -188,7 +175,6 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
 
         # hid
         # self.cmod_h.hide()
-        self.clook_sum.hide()
         # lab color
         middle_control.set_widget_color(self.cdatedata, fcolor=mycolor.lab_date_sum)
 
@@ -415,6 +401,16 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
 
     def slot_nameList_currText_changed(self, qstr):
         pass
+
+    def slot_checkfineall_state_changed(self, state):
+        modlevj.logger.debug('find name check state: %d' % state)
+        if state==2:
+            # selected
+            pass
+        else:
+            pass
+
+
 
 
     # 点击损耗按钮后 事件

@@ -1,0 +1,23 @@
+2018-02-27 23:09:36,871 modlevj.py ERROR   : this is error
+2018-02-27 23:11:36,738 modlevj.py INFO    : 进入modlevj模块
+2018-02-27 23:11:36,738 modlevj.py ERROR   : this is error
+2018-02-27 23:16:05,883 modlevj.py INFO    : 进入modlevj模块
+2018-02-27 23:16:05,884 modlevj.py ERROR   : this is error
+2018-02-27 23:21:44,956 modlevj.py INFO    : 进入modlevj模块
+2018-02-27 23:21:44,957 modlevj.py DEBUG   : this is debug
+2018-02-27 23:21:44,957 modlevj.py ERROR   : this is error
+2018-02-27 23:52:12,450 modlevj.py INFO    : 进入modlevj模块
+2018-02-27 23:52:22,516 modlevj.py INFO    : 进入modlevj模块
+2018-02-27 23:53:20,478 modlevj.py INFO    : 进入modlevj模块
+2018-02-27 23:55:11,982 modlevj.py INFO    : 进入modlevj模块
+2018-02-27 23:57:35,589 modlevj.py INFO    : 进入modlevj模块
+2018-02-27 23:57:51,220 ui.py DEBUG   : find name check state: 2
+2018-02-27 23:57:51,963 ui.py DEBUG   : find name check state: 0
+2018-02-28 00:00:14,799 modlevj.py INFO    : 进入modlevj模块
+2018-02-28 00:09:42,635 modlevj.py INFO    : 进入modlevj模块
+2018-02-28 00:13:28,027 modlevj.py INFO    : 进入modlevj模块
+2018-02-28 00:14:12,836 modlevj.py INFO    : 进入modlevj模块
+2018-02-28 00:14:20,483 modlevj.py INFO    : 进入modlevj模块
+2018-02-28 00:15:01,555 modlevj.py INFO    : 进入modlevj模块
+2018-02-28 05:27:06,061 modlevj.py INFO    : 进入modlevj模块
+2018-02-28 05:27:21,518 modlevj.py INFO    : 进入modlevj模块
