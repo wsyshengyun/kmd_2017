@@ -81,6 +81,7 @@ class Ui_Huo(QDialog, ui_huo.Ui_Dialog):
         else:
             newhuo.id = self.huoObj.id
             self.huoObj.mod(newhuo)
+            modlevj.logger.info('修改货物: %s' % self.huoObj.toStr())
             # modlevj.mod_huo(ty, pay, nums, ibvalid, ibLa, crdate, bz, self.huoObj.id)
 
 

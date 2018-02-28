@@ -8,6 +8,7 @@ __author__ = 'Administrator'
 import datetime
 import time
 from sqlbase import *
+from huovj import *
 
 
 # 个人事件情况
@@ -41,19 +42,22 @@ class EvVj(Base):
         if None == crdate:
             # self.crdate = datetime.date.today()
             self.crdate = str(datetime.date.today()) + ' ' + time.strftime("%H:%M:%S") # mok
+
     def toStr(self):
-        return '|'.join([self.id, self,nameId, self.huoId, self.sh, self.fa, self.sun, self.numla, self.money,
+        return '|'.join(str(i)for i in [self.id, self.nameId, self.huoId, self.sh, self.fa, self.sun, self.numla, self.money,
         self.crdate, self.bz])
 
     def toList(self):
         return self.id, self.nameId, self.huoId, self.sh, self.fa, self.sun, self.numla, self.money, self.crdate, self.bz
+
     def add(self):
             add_data(self)
+
     def mod(self, new):
         mod_data(new)
+
     def delself(self):
         del_data(self)
-
 
     def get_tu(self):
         return str(self.id), str(self.nameId), str(self.huoId), str(self.sh),\

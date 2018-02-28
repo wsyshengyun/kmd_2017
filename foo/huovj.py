@@ -53,6 +53,19 @@ class HuoVj(Base):
             self.crdate
         ])
 
+    def toStr(self):
+        return '|'.join(str(i) for i in [
+            self.id,
+            self.ty,
+            self.pay,
+            self.nums,
+            self.bvalid,
+            self.bLa,
+            self.bz,
+            self.crdate
+        ])
+
+
 
 
 

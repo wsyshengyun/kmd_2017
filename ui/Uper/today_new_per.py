@@ -90,6 +90,7 @@ class Ui_per(QDialog, per.Ui_Dialog):
         if self.per:  # 修改人物， 下面保存修改
             newper.id = self.per.id
             self.per.mod(newper)
+            modlevj.logger.info('修改人物: %s' % self.per.toStr())
         else:  # 新建的人物
             newper.add()
         self.accept()

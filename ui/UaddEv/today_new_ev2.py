@@ -445,7 +445,6 @@ class NewEv2Ui(QDialog):
             modlevj.logger.info(u'修改事件: %s' % self.evObj.toStr())
         else:  # 新建事件
             newev.add()
-            modlevj.logger.info(u'新建事件: %s' % newev.toStr())
         self.accept()
 
 

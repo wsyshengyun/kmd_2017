@@ -21,3 +21,20 @@
 2018-02-28 00:15:01,555 modlevj.py INFO    : 进入modlevj模块
 2018-02-28 05:27:06,061 modlevj.py INFO    : 进入modlevj模块
 2018-02-28 05:27:21,518 modlevj.py INFO    : 进入modlevj模块
+2018-02-28 06:52:01,970 modlevj.py [line:34]INFO    : 进入modlevj模块
+2018-02-28 06:52:34,129 modlevj.py [line:34]INFO    : 进入modlevj模块
+2018-02-28 06:55:55,908 modlevj.py [line:34]INFO    : 进入modlevj模块
+2018-02-28 06:57:39,304 modlevj.py [line:34]INFO    : 进入modlevj模块
+2018-02-28 07:00:34,752 today_new_ev2.py [line:445]INFO    : 修改事件: 6521|1267|114|1000|0|0|1000|70.0|2018-02-28 06:58:06|
+2018-02-28 07:15:21,685 modlevj.py [line:34]INFO    : 进入modlevj模块
+2018-02-28 07:28:10,873 modlevj.py [line:34]INFO    : 进入modlevj模块
+2018-02-28 07:28:29,787 modlevj.py [line:34]INFO    : 进入modlevj模块
+2018-02-28 07:29:30,478 modlevj.py [line:34]INFO    : 进入modlevj模块
+2018-02-28 07:31:50,487 modlevj.py [line:34]INFO    : 进入modlevj模块
+2018-02-28 07:31:59,471 ui.py [line:500]INFO    : 新建事件: 6524|1267|114|0|1000|0|2000|0.0|2018-02-28 07:31:59|
+2018-02-28 07:48:56,350 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-02-28 07:49:22,861 today_new_huo.py [line:84]INFO    : 修改货物: 101|粘纸|0.08|140000|0|0|70包|2016-08-21
+2018-02-28 07:49:36,809 today_new_per.py [line:93]INFO    : 修改人物: [ 1267 史群 15628452828 宗桥 1 2016-12-04  ]
+2018-02-28 08:11:22,421 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-02-28 08:11:35,041 ui.py [line:537]INFO    : 新建货物: 117|粘纸|0.09|0|1|0|12345|2018-02-28
+2018-02-28 08:11:48,962 ui.py [line:481]INFO    : 新建人物: [ 1572 sjd  其它 1 2018-02-28 567777 ]

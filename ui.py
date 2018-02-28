@@ -477,6 +477,8 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
         if newPerDialog.exec_()== QDialog.Accepted:
             modlevj.up_manyPers()
             self.set_findName_edit_completer( )
+            last_per = modlevj.get_last_per()
+            modlevj.logger.info('新建人物: %s' % last_per.toStr())
 
     # 修改人物 事件
     def slot_modPer(self):
@@ -495,6 +497,9 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
             if dialog.exec_() == QDialog.Accepted:
                 self.update_display_per()
                 self.slot_date_finished()
+                # orm查找最后添加的事件,可以知道事件的ID
+                last_ev = modlevj.get_last_ev()
+                modlevj.logger.info(u'新建事件: %s' % last_ev.toStr())
 
 
 
@@ -528,6 +533,8 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
         dialog = Ui_Huo()
         if dialog.exec_()==QDialog.Accepted:
             modlevj.many_huos.up_huos()
+            last_huo = modlevj.get_last_huo()
+            modlevj.logger.info('新建货物: %s' % last_huo.toStr())
 
     # 点击排序按钮对应事件
     def btn_sort(self):

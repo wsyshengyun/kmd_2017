@@ -13,7 +13,7 @@ import sys
 
 logger = logging.getLogger('modlevj_app')
 # 指定logger人输出格式
-formatter = logging.Formatter('%(asctime)s %(filename)s %(levelname)-8s: %(message)s')
+formatter = logging.Formatter('%(asctime)s %(filename)s [line:%(lineno)d]%(levelname)-8s: %(message)s')
 # 文件日志
 file_handler = logging.FileHandler("log/file.log")
 file_handler.setFormatter(formatter) # 可以通过setFormatter指定输出格式
@@ -31,7 +31,7 @@ logger.addHandler(console_handler)
 logger.setLevel(logging.DEBUG)
 
 
-logger.info(u'进入modlevj模块')
+logger.debug(u'进入modlevj模块')
 
 class Set1(Base):
     __tablename__ = 'set'
@@ -686,6 +686,26 @@ class TMYData(object):
             _lit.sort(key=lambda x: gcl.strdate_to_date_M(x[0]), reverse=True )
 
         return _lit
+
+def get_last_ev():
+    evquery = session.query(EvVj)
+    count_evs = evquery.count()
+    last_ev = evquery.get(count_evs)
+    return last_ev
+
+def get_last_per():
+    _query = session.query(PersonVj)
+    # count_per = _query.count()
+    # last_per = _query.get(count_per)
+    last_per = _query.order_by(PersonVj.id.desc()).first()
+    return last_per
+
+def get_last_huo():
+    _query = session.query(HuoVj)
+    # count_huo = _query.count()
+    # last_huo = _query.get(count_huo)
+    last_huo = _query.order_by(HuoVj.id.desc()).first()
+    return last_huo
 
 # 可能不用
 class Test(object):

@@ -41,6 +41,16 @@ class PersonVj(Base):
     def delself(self):
         del_data(self)
 
+    def toStr(self):
+        temList = ['[',  str(self.id),
+                    self.name,
+                    self.phone,
+                    self.adress,
+                    str(self.bLine),
+                    self.crdate,
+                    self.bz,  ']'
+                    ]
+        return ' '.join(temList)
 
     def __str__(self):
         temList = ['[',  str(self.id),
