@@ -688,40 +688,22 @@ class TMYData(object):
         return _lit
 
 def get_last_ev():
-    evquery = session.query(EvVj)
-    count_evs = evquery.count()
-    last_ev = evquery.get(count_evs)
-    return last_ev
+    return get_end_obj(EvVj)
+
+def get_end_obj(className):
+    if hasattr(className, 'id'):
+        _query = session.query(className)
+        endobj = _query.order_by(className.id.desc()).first()
+        return endobj
+    else:
+        ui_log.error('%s has not attr id' % className)
+        return None
 
 def get_last_per():
-    _query = session.query(PersonVj)
-    # count_per = _query.count()
-    # last_per = _query.get(count_per)
-    last_per = _query.order_by(PersonVj.id.desc()).first()
-    return last_per
+    return get_end_obj(PersonVj)
 
 def get_last_huo():
-    _query = session.query(HuoVj)
-    # count_huo = _query.count()
-    # last_huo = _query.get(count_huo)
-    last_huo = _query.order_by(HuoVj.id.desc()).first()
-    return last_huo
-
-# 可能不用
-class Test(object):
-    def __init__(self, parent=None):
-        self.persOwn = []
-        self.perAll = []
-        self.perAdressAll = []
-        self.huoAll = []
-        self.huoTys = []
-        self.todayEvIds = []
-
-
-
-
-
-
+    return get_end_obj(HuoVj)
 
 
 

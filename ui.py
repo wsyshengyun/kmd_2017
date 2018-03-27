@@ -2,8 +2,6 @@
 import sys
 sys.path.append("/home/pi/kmdVj/ui")
 
-# from PyQt4.QtGui import *
-# from PyQt4.QtCore import *
 from ui import table
 from ui import mycolor
 from ui import middle_control
@@ -34,6 +32,7 @@ __author__ = 'Administrator'
 
 QTextCodec.setCodecForTr(QTextCodec.codecForName('utf8'))
 HIDE_HISTORY_NAME = True   # 隐藏历史名字列表
+ui_log = modlevj.logger
 
 
 
@@ -375,11 +374,10 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
             except ValueError:
                 break
         ilen = len(listitems)
-        tsl = [str(ilen), ' - ', str(int(val))]
-        # self.lab_calcul.setText(''.join(tsl))
-        print tsl
+        tsl = ''.join([str(ilen), ' - ', str(int(val))])
+        ui_log.debug('ev table selected sum value is: %s' % tsl)
 
-    # 事件表格的 范围
+    # 事件表格的范围
     def get_evTable_rect(self):
         items = self.cevTable.selectedItems( )
         item0 = items[0]
@@ -420,8 +418,6 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
         dialog.show()
         qe = QEventLoop()
         qe.exec_()
-        # if dialog.exec_():
-            # pass
 
     # 双击表格一行后 事件
     def slot_nameList_doubleClicked(self):
