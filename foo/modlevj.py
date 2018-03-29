@@ -104,9 +104,6 @@ class ManyPerVj(BaseMany):
         self.real_name_pers = {}
         self.id_perObj = {}
 
-    def getOwnPerNames():
-        return []
-
     def up_data(self):
         self.lit=[]
         datas = session.query(PersonVj).all()
@@ -124,12 +121,20 @@ class ManyPerVj(BaseMany):
             name = per.name
             if not isinstance(name, unicode): name = unicode(name)
             index_name = gcl.getPinyin(name)
-            if not per.bLine:
+            if not per.bLine: # 搜索中去掉不在线的人物
                 index_name = '.' + index_name
             self.names[index_name] = per
             self.id_names[per.id] = per.name
             self.id_perObj[per.id] = per
             self.real_name_pers[per.name] = per
+
+    # @staticmethod
+    # def namesToPinyinNames(nameList):
+        # newNames = []
+        # if nameList is not None:
+            # for name in nameList:
+                # newNames.append(gcl.getPinyin(name))
+        # return  newNames
 
 
 def up_manyPers():
@@ -161,7 +166,7 @@ def get_huo_valid_ids():
 
 
 def find_all_evs():
-    return session.query(EvVj).all()
+    return session.query(EvVj).filter(and_(EvVj.crdate>d1, EvVj.crdate<d2)).all()
 
 
 # ***************************************************************主界面
@@ -458,6 +463,13 @@ class AllEvs(object):
         self.pid_xevExpand_Dict = {}
         self.xevEXpand = Xev_expand()
 
+    def getOwnPerPids(self):
+        ownedPids = []
+        for pid in self.pid_xevExpand_Dict:
+            if self.pid_xevExpand_Dict[pid].is_own():
+                ownedPids.append(pid)
+        return ownedPids
+
 
     def up_all_evs(self):
         for evobj in find_all_evs():
@@ -705,6 +717,21 @@ def get_last_per():
 def get_last_huo():
     return get_end_obj(HuoVj)
 
+
+def getOwnPerABCNames():
+    allevs = AllEvs()
+    allevs.up_all_evs()
+    allevs.get_per_xev_expand()
+
+    ownedPids = allevs.getOwnPerPids()
+    id_namesDit = many_pers.id_names
+    ownedABCNames = []
+    if ownedPids:
+        for pid in ownedPids:
+            name = id_namesDit[pid]
+            ABCname = gcl.getPinyin(name)
+            ownedABCNames.append(ABCname)
+    return ownedABCNames
 
 
 

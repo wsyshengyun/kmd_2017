@@ -9,6 +9,6 @@ import Uset
 import Usort
 import Usun
 import Utoday
-import middle_control, mycolor, myedit, myui_findPer, table, uiMain
+import middle_control, mycolor, myedit, myui_findPer, table, uiMain , ui_todo
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *

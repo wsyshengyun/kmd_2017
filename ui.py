@@ -1,4 +1,5 @@
 # coding=utf8
+
 import sys
 sys.path.append("/home/pi/kmdVj/ui")
 
@@ -6,12 +7,15 @@ from ui import table
 from ui import mycolor
 from ui import middle_control
 from ui import uiMain
+from ui import ui_todo
 from ui.uiMain import  *
 
 import re
 from foo import modlevj
 from foo import gcl
 from foo.pervj import PersonVj
+from foo.sqlbase import getOsName, WINDOWSNAME, LINUXNAME
+from foo.evvj import EvVj
 
 from UaddEv.today_new_ev import Ui_Ev
 from Uhuo.today_new_huo import Ui_Huo
@@ -31,7 +35,7 @@ __author__ = 'Administrator'
 '''
 
 QTextCodec.setCodecForTr(QTextCodec.codecForName('utf8'))
-HIDE_HISTORY_NAME = True   # 隐藏历史名字列表
+# HIDE_HISTORY_NAME = True   # 隐藏历史名字列表
 ui_log = modlevj.logger
 
 
@@ -76,6 +80,7 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
                            u'排序': self.btn_sort,
                            u'查看人物':self.btn_look_per,
                            u'每天':self.btn_today_data,
+                           u'待办':self.btn_todo,
                            }
 
         self.row_rect = QRect()
@@ -93,17 +98,27 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
 
 
         self.findName.installEventFilter(self)
-        self.cob_name.installEventFilter(self)  # 历史名字列表
+        # self.cob_name.installEventFilter(self)  # 历史名字列表
         self.installEventFilter(self)
-        self.cob_name.currentIndexChanged.connect(self.set_findName_text_from_cobName)
+        # self.cob_name.currentIndexChanged.connect(self.set_findName_text_from_cobName)
         # connect
         self.cevTable.itemSelectionChanged.connect(self.slot_cevTable_itemSelectionChanged)
         self.ccheck_find_allNames.stateChanged.connect(self.slot_checkfineall_state_changed)
 
         self.set_search_ico()
 
-        if HIDE_HISTORY_NAME:
-            self.cob_name.hide()
+        # if HIDE_HISTORY_NAME:
+            # self.cob_name.hide()
+
+        # lit = self.chick
+        lit = [self.ccheck_find_allNames, self.cevTable, self.findBtn, self.modPerBtn,
+                self.disNameLab, self.disNameLab, self.newPerBtn,
+                self.cAddev, self.cdate, self.chuobox, self.cownTable,
+                self.nameListWidget,self.cnew_h, self.cset, self.csort, self.clook_h,
+                self.clook_per, self.cook_sun, self.cdatedata,
+                self.cla_own,  self.ctodayData, self.ctodoBtn]
+        for widget in lit:
+            widget .setFocusPolicy(Qt.ClickFocus)
 
     def set_search_ico(self):
 
@@ -128,31 +143,31 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
 
 
 
-    def set_findName_text_from_cobName(self, text):
-        text = self.cob_name.currentText()
-        self.findName.setText(text)
-        self.findName.setFocus()
+    # def set_findName_text_from_cobName(self, text):
+        # text = self.cob_name.currentText()
+        # self.findName.setText(text)
+        # self.findName.setFocus()
 
-    def set_cobName_from_tempNameList(self):
-        word = QStringList()
-        for i in self.nametempList:
-            word<<i
-        self.cob_name.clear()
-        self.cob_name.addItems(word)
+    # def set_cobName_from_tempNameList(self):
+        # word = QStringList()
+        # for i in self.nametempList:
+            # word<<i
+        # self.cob_name.clear()
+        # self.cob_name.addItems(word)
 
 
     def myConnect(self):
-        self.findName.returnPressed.connect(self.findNameReturnPressed)
+        self.findName.returnPressed.connect(self.slot_find_name)
 
 
-    def findNameReturnPressed(self):
-        self.slotFindNameBtnClicked()
-        self.slot_add_ev()
+    # def findNameReturnPressed(self):
+        # self.slotFindNameBtnClicked()
+        # # self.slot_add_ev()
 
     # 初始化
     def init(self):
         # nameLine
-        self.set_findName_edit_completer( )
+        self.setLineEditCompleter( )
 
         self.bt_evTable = table.EvTable( self.cevTable )
         self.bt_evTable.init( )
@@ -169,7 +184,7 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
         self.cdate.setDate(QDate().currentDate())
 
         # lit
-        self.init_list_widget()
+        self.init_ListWidget()
         self.slot_date_finished()
 
         # hid
@@ -180,7 +195,6 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
     def keyPressEvent(self, ekey):
         pass
 
-
     def eventFilter(self, obj, event):
         if obj==self.findName and  event.type() == QEvent.KeyPress:
             # if event.key() == Qt.Key_1 and event.modifiers()==Qt.AltModifier:
@@ -189,7 +203,14 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
 
         # if obj==self.cob_name and event.type() == QEvent.HoverEnter:
         #     self.cob_name.showPopup()
-        #     show(u'cob_name:HoverEnter')
+        #     show(u'cob_name:HoverEnter'
+
+        # if event.type() == QEvent.KeyPress:
+             # key = event.key()
+             # if key==Qt.Key_Tab:
+                # event.ignore()
+                # print 'return Key_Tab'
+                # return
 
         return super(MainUi, self).eventFilter(obj, event)
 
@@ -229,7 +250,7 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
         self.disNameLab.setToolTip(qtsr)
 
     # 初始化今日人物的列表
-    def init_list_widget(self):
+    def init_ListWidget(self):
         self.nameListWidget.clear( )
         names = modlevj.datework.get_names()
 
@@ -251,10 +272,14 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
         middle_control.set_widget_color(self.cdate, _dit[val])
         # middle_control.set_widget_color(self.cdate, fcolor=_dit[val])
 
-    def set_findName_edit_completer(self):
-        qlist = [QString(utser) for utser in modlevj.many_pers.names.keys()]
-        self.icompleter = QCompleter(qlist)
-        self.findName.setCompleter(self.icompleter)
+    def setLineEditCompleter(self, ball=True):
+        if ball:
+            qlist = [QString(utser) for utser in modlevj.many_pers.names.keys()]
+        else:
+            qlist = [QString(utser) for utser in modlevj.getOwnPerABCNames()]
+        words = QStringList(qlist)
+        self.findName.set_words(words)
+
 
     def update_display_per(self):
         if modlevj.curper:
@@ -275,9 +300,7 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
             except ValueError:
                 evs = modlevj.perwork.allEvs
             if evs:
-                # print u"个人ev数: %d" % len(evs)
                 evs.sort( key=lambda x_ev: x_ev.id, reverse=True )
-                # print len(evs)
                 self.bt_evTable.insert_evs( evs )
                 self.set_evTable_textcolor_from_sunInfo( )
 
@@ -326,6 +349,32 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
                 u'下一天': self.qdateedit_goto_tomorrow,
             }
             B_Menu(self, _dict)
+
+    def slot_cownTable_DoubleClicked(self, row, col):
+        item0Text = self.cownTable.item(row, 0).text().__str__()
+        item1Text = self.cownTable.item(row, 1).text().__str__()
+        huoid = int( item0Text )
+        ownNum = int( item1Text )
+        val_lit = [None]*10
+        val_lit[1] = modlevj.curper.id
+        val_lit[2] = huoid
+        val_lit[3] = ownNum
+        val_lit[4] = 0
+        val_lit[5] = 0
+        val_lit[6] = 0
+        huoobj = modlevj.many_huos.id_obj_dict[huoid]
+        if huoobj.pay:
+            money = ownNum * huoobj.pay
+        else:
+            money = 0.0
+        val_lit[7] = money
+        val_lit[8] = gcl.qdateToSdate_andTime( self.cdate.date())
+        val_lit[9] = ''
+        newev = EvVj(*val_lit)
+        newev.add()
+
+        self.update_display_per()
+        self.slot_date_finished()
 
     def qdateedit_goto_lastDay(self):
         now_day = self.cdate.date()
@@ -390,7 +439,7 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
     def slot_date_finished(self):
         modlevj.curdate = gcl.qdateToSDate(self.cdate.date())
         modlevj.up_datework()
-        self.init_list_widget()
+        self.init_ListWidget()
         self.cdatedata.setText(QString(modlevj.datework.format_h_xev_to_datedata()))
 
     # 日期改变 事件
@@ -404,9 +453,9 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
         modlevj.logger.debug('find name check state: %d' % state)
         if state==2:
             # selected
-            pass
+           self.setLineEditCompleter()
         else:
-            pass
+           self.setLineEditCompleter(False)
 
 
 
@@ -433,6 +482,7 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
     # 按下查找按钮后 事件
     def slotFindNameBtnClicked(self):
         self.slot_find_name()
+        self.slot_add_ev()
 
 
     # 查找人物 事件
@@ -472,7 +522,7 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
         newPerDialog = Ui_per()
         if newPerDialog.exec_()== QDialog.Accepted:
             modlevj.up_manyPers()
-            self.set_findName_edit_completer( )
+            self.setLineEditCompleter( )
             last_per = modlevj.get_last_per()
             modlevj.logger.info('新建人物: %s' % last_per.toStr())
 
@@ -484,7 +534,7 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
             if dialog.exec_():
                 modlevj.many_pers.mod(modlevj.curper)
                 modlevj.many_pers.up_other_from_persLit( )
-                self.set_findName_edit_completer( )
+                self.setLineEditCompleter( )
 
     # 添加新事件  事件
     def slot_add_ev(self):
@@ -556,7 +606,20 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
 
     def _getMainFrameRightPos(self):
         rect = self.frameGeometry()
-        return QPoint(rect.x()+rect.width(), rect.y())
+        if getOsName() == LINUXNAME:
+            return QPoint(rect.x()+rect.width() + 7, rect.y() - 30 )
+        elif getOsName() == WINDOWSNAME:
+            return QPoint(rect.x()+rect.width(), rect.y())
+        else:
+            pass
+
+    def btn_todo(self):
+        ui_log.debug('btn_todo is execute ')
+        dialog = ui_todo.TodoUi(pos=self._getMainFrameRightPos())
+        dialog.show()
+        qe = QEventLoop()
+        qe.exec_()
+        pass
 
 
 if __name__ == '__main__':

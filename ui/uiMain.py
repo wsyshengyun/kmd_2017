@@ -9,6 +9,7 @@
 # from PyQt4.QtGui import *
 # from PyQt4.QtCore import *
 from middle_control import *
+from myedit import AutoCompleteEdit
 
 try:
     _fromUtf8 = QString.fromUtf8
@@ -37,7 +38,8 @@ class Ui_Dialog(object):
         self.move(0, 0)
         Dialog.setWindowFlags(Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint |
             Qt.CustomizeWindowHint)
-        self.findName = QLineEdit(Dialog)
+        # self.findName = QLineEdit(Dialog)
+        self.findName = AutoCompleteEdit(Dialog)
         self.findName.setMinimumHeight(HEIGHT_FINDNAME)
         self.findName.setText(_fromUtf8(""))
         self.findName.setFont(FONT_INPUT)
@@ -89,6 +91,7 @@ class Ui_Dialog(object):
         self.cook_sun = QPushButton(Dialog)
         self.cdatedata = QLabel(Dialog)
         self.cdatedata.setText(_fromUtf8(""))
+        self.ctodoBtn = QPushButton(Dialog)
         # cdatedata
         self.cdatedata.setFrameShape(QFrame.Panel)
         self.cdatedata.setFrameShadow(QFrame.Sunken)
@@ -96,7 +99,7 @@ class Ui_Dialog(object):
         self.cdatedata.setFont(FONT_INPUT)
 
         self.cla_own = QLabel(Dialog)
-        self.cob_name = QComboBox(Dialog)
+        # self.cob_name = QComboBox(Dialog)
         self.retranslateUi(Dialog)
 
         self.ctodayData = QPushButton(u'每天')
@@ -157,6 +160,7 @@ class Ui_Dialog(object):
         h_btn.addWidget(self.clook_per)
         h_btn.addWidget(self.csort)
         h_btn.addWidget(self.ctodayData)
+        h_btn.addWidget(self.ctodoBtn)
 
         # 最后一 横层
         h_di.addWidget(self.cdatedata)
@@ -174,6 +178,7 @@ class Ui_Dialog(object):
         QObject.connect(self.cook_sun, SIGNAL(_fromUtf8("clicked()")), Dialog.slot_sun_clicked)
         QObject.connect(self.clook_h, SIGNAL(_fromUtf8("clicked()")), Dialog.slot_btn_clicked)
         QObject.connect(self.clook_per, SIGNAL(_fromUtf8("clicked()")), Dialog.slot_btn_clicked)
+        QObject.connect(self.ctodoBtn, SIGNAL(_fromUtf8("clicked()")), Dialog.slot_btn_clicked)
         QObject.connect(self.csort, SIGNAL(_fromUtf8("clicked()")), Dialog.slot_btn_clicked)
         QObject.connect(self.cset, SIGNAL(_fromUtf8("clicked()")), Dialog.slot_btn_clicked)
         QObject.connect(self.ctodayData, SIGNAL(_fromUtf8("clicked()")), Dialog.slot_btn_clicked)
@@ -181,8 +186,10 @@ class Ui_Dialog(object):
         QObject.connect(self.cevTable, SIGNAL(_fromUtf8("cellDoubleClicked(int,int)")), Dialog.slot_cell_double_clicked)
         QObject.connect(self.cdate, SIGNAL(_fromUtf8("dateChanged(QDate)")), Dialog.slot_date_changed)
         QObject.connect(self.cevTable, SIGNAL(_fromUtf8("customContextMenuRequested(QPoint)")), Dialog.slot_mytable_context)
-        QObject.connect(self.cevTable, SIGNAL(_fromUtf8("cellClicked(int,int)")), Dialog.slot_cell_clicked)
+        QObject.connect(self.cownTable, SIGNAL(_fromUtf8("cellDoubleClicked(int, int)")), Dialog.slot_cownTable_DoubleClicked)
+        # QObject.connect(self.cownTable, SIGNAL(_fromUtf8("customContextMenuRequested(QPoint)")), Dialog.slot_mytable_context)
         QObject.connect(self.cdate, SIGNAL(_fromUtf8("customContextMenuRequested(QPoint)")), Dialog.slot_mytable_context)
+        QObject.connect(self.cevTable, SIGNAL(_fromUtf8("cellClicked(int,int)")), Dialog.slot_cell_clicked)
         QMetaObject.connectSlotsByName(Dialog)
 
 
@@ -205,3 +212,4 @@ class Ui_Dialog(object):
         self.clook_per.setText(_translate("Dialog", "查看人物", None))
         self.cook_sun.setText(_translate("Dialog", "个人损耗", None))
         self.cla_own.setText(_translate("Dialog", "-", None))
+        self.ctodoBtn.setText(_translate("Dialog", '待办', None))

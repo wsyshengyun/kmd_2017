@@ -98,3 +98,149 @@
 2018-03-23 18:55:45,993 ui.py [line:378]DEBUG   : ev table selected sum value is: 1 - 500
 2018-03-23 18:55:46,214 ui.py [line:378]DEBUG   : ev table selected sum value is: 2 - 500
 2018-03-23 18:56:01,583 ui.py [line:378]DEBUG   : ev table selected sum value is: 0 - 0
+2018-03-27 21:52:11,096 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-27 21:53:37,385 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-27 21:59:18,130 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-27 22:01:18,646 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-27 22:01:41,056 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-27 22:02:45,838 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-27 22:12:44,425 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-27 22:15:32,517 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-27 22:16:08,492 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-27 22:32:02,222 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-28 10:10:44,259 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-28 10:28:02,785 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-28 10:29:28,093 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-28 10:38:52,713 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-28 10:39:31,046 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-28 11:34:55,656 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-28 11:37:03,729 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-28 11:48:11,661 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-28 11:48:30,267 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-28 11:50:04,039 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-28 11:50:47,002 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-28 11:51:06,446 ui.py [line:429]DEBUG   : find name check state: 2
+2018-03-28 11:51:07,791 ui.py [line:429]DEBUG   : find name check state: 0
+2018-03-28 11:51:30,611 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-28 11:52:53,035 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-28 11:54:10,755 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-28 11:56:27,240 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-28 12:09:16,085 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-28 12:30:24,122 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-28 15:32:40,221 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-28 15:57:24,523 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-28 15:58:12,827 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-28 16:00:17,703 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-28 16:00:39,805 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-28 16:04:11,490 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-28 16:04:55,006 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-28 16:40:19,418 ui.py [line:400]DEBUG   : ev table selected sum value is: 1 - 0
+2018-03-28 16:40:19,564 ui.py [line:400]DEBUG   : ev table selected sum value is: 1 - 2000
+2018-03-28 16:40:19,871 ui.py [line:400]DEBUG   : ev table selected sum value is: 1 - 0
+2018-03-28 16:40:20,598 ui.py [line:400]DEBUG   : ev table selected sum value is: 1 - 2000
+2018-03-28 16:40:20,942 ui.py [line:400]DEBUG   : ev table selected sum value is: 1 - 2000
+2018-03-28 16:40:21,839 ui.py [line:400]DEBUG   : ev table selected sum value is: 1 - 1980
+2018-03-28 16:40:22,182 ui.py [line:400]DEBUG   : ev table selected sum value is: 1 - 2000
+2018-03-28 16:40:22,472 ui.py [line:400]DEBUG   : ev table selected sum value is: 1 - 2000
+2018-03-28 16:40:22,991 ui.py [line:400]DEBUG   : ev table selected sum value is: 1 - 1000
+2018-03-28 16:40:23,391 ui.py [line:400]DEBUG   : ev table selected sum value is: 1 - 0
+2018-03-28 16:40:23,848 ui.py [line:400]DEBUG   : ev table selected sum value is: 1 - 2000
+2018-03-28 16:40:24,222 ui.py [line:400]DEBUG   : ev table selected sum value is: 1 - 0
+2018-03-28 16:40:24,631 ui.py [line:400]DEBUG   : ev table selected sum value is: 1 - 2000
+2018-03-28 16:40:24,974 ui.py [line:400]DEBUG   : ev table selected sum value is: 1 - 2000
+2018-03-28 16:40:25,646 ui.py [line:400]DEBUG   : ev table selected sum value is: 1 - 2000
+2018-03-28 16:40:26,422 ui.py [line:400]DEBUG   : ev table selected sum value is: 0 - 0
+2018-03-28 16:40:26,752 ui.py [line:400]DEBUG   : ev table selected sum value is: 1 - 0
+2018-03-28 16:40:30,606 ui.py [line:400]DEBUG   : ev table selected sum value is: 1 - 0
+2018-03-28 16:40:31,102 ui.py [line:400]DEBUG   : ev table selected sum value is: 1 - 0
+2018-03-28 16:40:31,558 ui.py [line:400]DEBUG   : ev table selected sum value is: 1 - 0
+2018-03-28 16:40:31,950 ui.py [line:400]DEBUG   : ev table selected sum value is: 1 - 0
+2018-03-28 22:25:44,977 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-28 22:25:48,639 ui.py [line:591]DEBUG   : btn_todo is execute 
+2018-03-28 22:26:58,155 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-28 22:27:01,317 ui.py [line:591]DEBUG   : btn_todo is execute 
+2018-03-29 09:24:30,838 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-29 09:24:33,872 ui.py [line:591]DEBUG   : btn_todo is execute 
+2018-03-29 10:41:27,333 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-29 10:41:34,712 ui.py [line:591]DEBUG   : btn_todo is execute 
+2018-03-29 10:42:37,907 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-29 10:42:40,010 ui.py [line:591]DEBUG   : btn_todo is execute 
+2018-03-29 10:43:12,670 ui.py [line:591]DEBUG   : btn_todo is execute 
+2018-03-29 10:43:16,127 ui.py [line:591]DEBUG   : btn_todo is execute 
+2018-03-29 10:43:40,806 ui.py [line:591]DEBUG   : btn_todo is execute 
+2018-03-29 10:43:48,081 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-29 10:43:50,263 ui.py [line:591]DEBUG   : btn_todo is execute 
+2018-03-29 12:09:20,291 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-29 12:10:45,833 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-29 12:17:41,324 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-29 12:18:06,912 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-29 12:18:44,722 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-29 12:19:44,893 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-29 13:20:53,794 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-29 13:23:54,846 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-29 13:24:40,764 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-29 13:25:34,210 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-29 13:26:02,472 ui.py [line:549]INFO    : 新建事件: 6528|1267|114|0|1000|0|0|0.0|2018-03-29 13:26:02|
+2018-03-29 13:26:14,547 ui.py [line:549]INFO    : 新建事件: 6529|1267|113|0|500|0|500|0.0|2018-03-29 13:26:14|
+2018-03-29 13:26:24,242 ui.py [line:429]DEBUG   : ev table selected sum value is: 1 - 0
+2018-03-29 13:26:24,791 ui.py [line:429]DEBUG   : ev table selected sum value is: 1 - 0
+2018-03-29 13:26:25,384 ui.py [line:429]DEBUG   : ev table selected sum value is: 1 - 0
+2018-03-29 13:26:25,839 ui.py [line:429]DEBUG   : ev table selected sum value is: 1 - 1000
+2018-03-29 13:26:26,273 ui.py [line:429]DEBUG   : ev table selected sum value is: 1 - 0
+2018-03-29 13:26:26,719 ui.py [line:429]DEBUG   : ev table selected sum value is: 1 - 0
+2018-03-29 13:26:31,258 ui.py [line:429]DEBUG   : ev table selected sum value is: 1 - 0
+2018-03-29 13:26:34,344 ui.py [line:429]DEBUG   : ev table selected sum value is: 1 - 0
+2018-03-29 13:26:34,880 ui.py [line:429]DEBUG   : ev table selected sum value is: 1 - 1000
+2018-03-29 13:26:40,535 today_new_ev2.py [line:445]INFO    : 修改事件: 6528|1267|114|0|1000|0|0|0.0|2018-03-29 13:26:02|
+2018-03-29 13:26:40,556 ui.py [line:429]DEBUG   : ev table selected sum value is: 0 - 0
+2018-03-29 13:26:43,913 ui.py [line:429]DEBUG   : ev table selected sum value is: 1 - 0
+2018-03-29 13:26:44,999 ui.py [line:429]DEBUG   : ev table selected sum value is: 1 - 1000
+2018-03-29 13:26:45,783 ui.py [line:429]DEBUG   : ev table selected sum value is: 1 - 0
+2018-03-29 13:26:55,991 ui.py [line:429]DEBUG   : ev table selected sum value is: 1 - 2000
+2018-03-29 13:26:57,426 ui.py [line:618]DEBUG   : btn_todo is execute 
+2018-03-29 13:27:00,479 ui.py [line:429]DEBUG   : ev table selected sum value is: 1 - 70
+2018-03-29 13:27:01,064 ui.py [line:429]DEBUG   : ev table selected sum value is: 1 - 0
+2018-03-29 13:27:01,599 ui.py [line:429]DEBUG   : ev table selected sum value is: 1 - 1000
+2018-03-29 13:27:02,335 ui.py [line:429]DEBUG   : ev table selected sum value is: 1 - 0
+2018-03-29 13:27:06,047 ui.py [line:429]DEBUG   : ev table selected sum value is: 1 - 1000
+2018-03-29 13:27:10,967 today_new_ev2.py [line:445]INFO    : 修改事件: 6528|1267|114|0|1000|0|0|0.0|2018-03-29 13:26:02|
+2018-03-29 13:27:10,990 ui.py [line:429]DEBUG   : ev table selected sum value is: 0 - 0
+2018-03-29 13:27:11,983 ui.py [line:429]DEBUG   : ev table selected sum value is: 1 - 0
+2018-03-29 13:27:15,430 ui.py [line:455]DEBUG   : find name check state: 2
+2018-03-29 13:27:16,254 ui.py [line:455]DEBUG   : find name check state: 0
+2018-03-29 13:27:16,737 ui.py [line:455]DEBUG   : find name check state: 2
+2018-03-29 13:27:17,510 ui.py [line:455]DEBUG   : find name check state: 0
+2018-03-29 13:27:18,743 ui.py [line:455]DEBUG   : find name check state: 2
+2018-03-29 13:27:19,398 ui.py [line:455]DEBUG   : find name check state: 0
+2018-03-29 13:29:21,160 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-29 13:33:49,977 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-29 13:36:49,257 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-29 13:38:07,434 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-29 17:19:10,223 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-29 17:19:29,351 ui.py [line:619]DEBUG   : btn_todo is execute 
+2018-03-29 18:01:34,082 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-29 18:01:37,310 ui.py [line:619]DEBUG   : btn_todo is execute 
+2018-03-29 18:06:29,389 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-29 18:06:31,420 ui.py [line:619]DEBUG   : btn_todo is execute 
+2018-03-29 19:33:03,624 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-29 20:03:54,075 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-29 20:04:00,243 ui.py [line:616]DEBUG   : btn_todo is execute 
+2018-03-29 20:04:37,927 ui.py [line:616]DEBUG   : btn_todo is execute 
+2018-03-29 20:04:37,969 ui.py [line:616]DEBUG   : btn_todo is execute 
+2018-03-29 20:04:38,576 ui.py [line:616]DEBUG   : btn_todo is execute 
+2018-03-29 20:04:52,419 ui.py [line:426]DEBUG   : ev table selected sum value is: 1 - 0
+2018-03-29 20:04:53,220 ui.py [line:426]DEBUG   : ev table selected sum value is: 1 - 169
+2018-03-29 20:04:54,522 ui.py [line:426]DEBUG   : ev table selected sum value is: 1 - 0
+2018-03-29 20:04:55,194 ui.py [line:426]DEBUG   : ev table selected sum value is: 1 - 2000
+2018-03-29 20:04:56,202 ui.py [line:426]DEBUG   : ev table selected sum value is: 1 - 2113
+2018-03-29 20:04:56,579 ui.py [line:426]DEBUG   : ev table selected sum value is: 1 - 162
+2018-03-29 20:04:58,354 ui.py [line:426]DEBUG   : ev table selected sum value is: 0 - 0
+2018-03-29 20:33:25,443 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-29 20:33:30,236 ui.py [line:453]DEBUG   : find name check state: 2
+2018-03-29 20:33:31,240 ui.py [line:453]DEBUG   : find name check state: 0
+2018-03-29 20:39:48,092 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-29 20:39:50,737 ui.py [line:453]DEBUG   : find name check state: 2
+2018-03-29 20:39:51,450 ui.py [line:453]DEBUG   : find name check state: 0
+2018-03-29 20:40:30,560 ui.py [line:453]DEBUG   : find name check state: 2
+2018-03-29 20:40:38,963 ui.py [line:453]DEBUG   : find name check state: 0
+2018-03-29 20:40:59,783 ui.py [line:427]DEBUG   : ev table selected sum value is: 1 - 6450

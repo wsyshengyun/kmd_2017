@@ -4,16 +4,24 @@ from sqlalchemy import or_, and_
 from sqlalchemy.orm import sessionmaker, relationship
 from sqlalchemy.ext.declarative import declarative_base
 
-
-
+LINUXNAME = 'posix'
+WINDOWSNAME = 'nt'
+SQLDATA_PATH_ON_LINUX =  "/home/pi/kmdkmd.db"
+SQLDATA_PATH_ON_WINDOW = "E://kmdkmd.db"
 import os
+def getOsName():
+    return os.name
+
 path = ''
-if os.name == 'nt':
+if os.name ==WINDOWSNAME:
     #windows 系统
-    path = "E://kmdkmd.db"
-else:
+    path = SQLDATA_PATH_ON_WINDOW
+elif getOsName() == LINUXNAME:
     # linux 系统
-    path = "/home/pi/kmdkmd.db"
+    path = SQLDATA_PATH_ON_LINUX
+else:
+    # 添加异常
+    pass
 
 engine = create_engine("sqlite:///%s"%path, echo=False)
 #engine = create_engine("sqlite:///:memory:", echo=True)

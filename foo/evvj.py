@@ -138,6 +138,13 @@ class Xev_expand(object):
         self.hid_dict= {}
         self.ty_dict = {}
 
+    def is_own(self):
+        xevs = self.ty_dict.values()
+        for xev in xevs:
+            if xev.get_own() != 0:
+                return True
+        return False
+
     def clear(self):
         self.hid_dict= {}
         self.ty_dict = {}
