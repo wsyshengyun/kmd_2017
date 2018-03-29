@@ -244,3 +244,7 @@
 2018-03-29 20:40:30,560 ui.py [line:453]DEBUG   : find name check state: 2
 2018-03-29 20:40:38,963 ui.py [line:453]DEBUG   : find name check state: 0
 2018-03-29 20:40:59,783 ui.py [line:427]DEBUG   : ev table selected sum value is: 1 - 6450
+2018-03-29 21:28:59,408 modlevj.py [line:34]DEBUG   : 进入modlevj模块
+2018-03-29 21:29:09,603 ui.py [line:453]DEBUG   : find name check state: 2
+2018-03-29 21:29:10,501 ui.py [line:453]DEBUG   : find name check state: 0
+2018-03-29 21:29:45,501 modlevj.py [line:34]DEBUG   : 进入modlevj模块

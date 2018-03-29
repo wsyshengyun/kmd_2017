@@ -173,21 +173,21 @@ def find_all_evs():
 # 建立在线人物拼音字典  {wsy.汪生云:person}
 
 def search_evs(nameid, huoid):
-    datas = session.query(EvVj).filter(EvVj.nameId==nameid).filter(EvVj.huoId==huoid).all()
+    datas = session.query(EvVj).filter(and_(EvVj.crdate>d1, EvVj.crdate<d2, EvVj.nameId==nameid,EvVj.huoId==huoid)).all()
     return datas
 
 
 
 def search_evs_from_huoId(hid):
-    return session.query(EvVj).filter(EvVj.huoId==hid).all()
+    return session.query(EvVj).filter(and_(EvVj.crdate>d1, EvVj.crdate<d2,EvVj.huoId==hid)).all()
 
 
 
 def search_evs_only(pid):
-    return session.query(EvVj).filter(EvVj.nameId==pid).all()
+    return session.query(EvVj).filter(and_(EvVj.crdate>d1, EvVj.crdate<d2,EvVj.nameId==pid)).all()
 
 def search_evs_from_date():
-    return session.query(EvVj).filter( EvVj.crdate.like('%{}%'.format(curdate))).all()
+    return session.query(EvVj).filter(and_(EvVj.crdate>d1, EvVj.crdate<d2, EvVj.crdate.like('%{}%'.format(curdate)))).all()
     # return session.query(EvVj).filter(EvVj.crdate<d2).filter(EvVj.crdate>d1).all()
 
 

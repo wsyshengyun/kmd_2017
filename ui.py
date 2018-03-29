@@ -1,6 +1,7 @@
 # coding=utf8
 
 import sys
+
 sys.path.append("/home/pi/kmdVj/ui")
 
 from ui import table
@@ -167,7 +168,7 @@ class MainUi(QDialog, uiMain.Ui_Dialog):
     # 初始化
     def init(self):
         # nameLine
-        self.setLineEditCompleter( )
+        self.setLineEditCompleter( False)
 
         self.bt_evTable = table.EvTable( self.cevTable )
         self.bt_evTable.init( )
